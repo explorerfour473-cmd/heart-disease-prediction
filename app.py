@@ -91,7 +91,7 @@ def get_user_input():
     
     return scaled_input, user_data
 
-# --- ฟังก์ชันเสริม: วาดกราฟ Radar Chart (อัปเดตความโปร่งใสแล้ว) ---
+# --- ฟังก์ชันเสริม: วาดกราฟ Radar Chart (อัปเดตดีไซน์ให้เห็นชัด 100%) ---
 def show_radar_chart(user_data):
     # กำหนดหัวข้อและค่าที่จะวาด (วนกลับไปจุดเริ่มต้นเพื่อปิดกราฟให้เป็นรูปปิด)
     categories = ['ความดันโลหิต', 'คอเลสเตอรอล', 'อัตราหัวใจสูงสุด', 'ความดันโลหิต']
@@ -103,24 +103,23 @@ def show_radar_chart(user_data):
 
     fig = go.Figure()
 
-    # กราฟค่ามาตรฐาน (สีเขียว)
+    # 🟢 กราฟค่ามาตรฐาน (สีเขียว) - ทำเป็นเส้นปะเท่านั้น ไม่ถมสี
     fig.add_trace(go.Scatterpolar(
         r=normal_values,
         theta=categories,
-        fill='toself',
+        fill=None, # ไม่ถมสี
         name='ค่ามาตรฐานคนปกติ (Normal)',
-        line_color='#2ca02c',
-        opacity=0.5  # 🟢 เพิ่มความโปร่งใสตรงนี้
+        line=dict(color='#2ca02c', width=3, dash='dash') # เส้นหนา และเป็นเส้นปะ
     ))
 
-    # กราฟของ User (สีแดง)
+    # 🔴 กราฟของ User (สีแดง) - ถมสีและมีความโปร่งใส
     fig.add_trace(go.Scatterpolar(
         r=user_values,
         theta=categories,
         fill='toself',
         name='ข้อมูลของคุณ (Your Data)',
         line_color='#d62728',
-        opacity=0.6  # 🔴 เพิ่มความโปร่งใสตรงนี้
+        opacity=0.7 
     ))
 
     fig.update_layout(
@@ -132,10 +131,10 @@ def show_radar_chart(user_data):
     )
     
     st.markdown('**กราฟเปรียบเทียบสุขภาพ (Health Radar)**')
-    st.write("เปรียบเทียบข้อมูลของคุณกับเกณฑ์มาตรฐาน หากเส้นสีแดงทะลุกรอบสีเขียวออกไปมาก ควรเฝ้าระวังเป็นพิเศษครับ")
+    st.write("เปรียบเทียบข้อมูลของคุณกับเกณฑ์มาตรฐาน (เส้นปะสีเขียว) หากพื้นที่สีแดงทะลุกรอบเส้นปะออกไปมาก ควรเฝ้าระวังเป็นพิเศษครับ")
     st.plotly_chart(fig, use_container_width=True)
 
-# 4. ตั้งค่าเมนูด้านข้าง (Sidebar) แบบทางการ
+# 4. ตั้งค่าเมนูด้านข้าง (Sidebar)
 st.sidebar.markdown("### ระบบประเมินสุขภาพ")
 st.sidebar.markdown("โปรดเลือกเมนูที่ต้องการใช้งาน:")
 page = st.sidebar.radio("", 
@@ -276,7 +275,7 @@ elif page == "ระบบประเมิน - Neural Network":
         
         st.markdown('<div class="section-header">รายงานผลการวิเคราะห์เชิงลึก (Deep Analysis Report)</div>', unsafe_allow_html=True)
         
-        # ใช้ Metric แสดงตัวเลขแบบ Dashboard
+        # ใช้ Metric แสดงตัวเลข
         col_res1, col_res2 = st.columns(2)
         with col_res1:
             st.metric(label="โอกาสที่จะอยู่ในเกณฑ์ปกติ", value=f"{prob_normal:.1f}%")
