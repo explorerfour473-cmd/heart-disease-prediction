@@ -52,10 +52,10 @@ page = st.sidebar.radio("เลือกหน้าต่างทำงาน:
 )
 
 # ==========================================
-# --- หน้าที่ 1: อธิบายทฤษฎี ML (อัปเกรดเนื้อหา) ---
+# --- หน้าที่ 1: อธิบายทฤษฎี ML ---
 # ==========================================
 if page == "1. ทฤษฎี Machine Learning":
-    st.title("📖 ทฤษฎีการสร้าง Machine Learning")
+    st.title("ทฤษฎีการสร้าง Machine Learning")
     st.write("โปรเจคนี้ใช้ชุดข้อมูล Heart Disease จาก UCI โดยมีขั้นตอนการพัฒนาโมเดลตั้งแต่การเตรียมข้อมูลไปจนถึงการเทรน ดังนี้:")
     
     st.header("Step 1: การเตรียมข้อมูล (Data Preprocessing)")
@@ -63,7 +63,7 @@ if page == "1. ทฤษฎี Machine Learning":
     st.markdown("""
     - **จัดการค่าว่าง (Missing Values):** ลบหรือเติมข้อมูลในช่องที่ว่างเปล่า
     - **แปลงข้อความเป็นตัวเลข (One-Hot Encoding):** แปลงคอลัมน์เช่น เพศ, อาการเจ็บหน้าอก ให้เป็นตัวเลข 0 และ 1
-    - **ปรับสเกลข้อมูล (Feature Scaling):** ปรับช่วงของตัวเลข (เช่น อายุ 50, คอเลสเตอรอล 200) ให้มาอยู่ในสเกลเดียวกัน โมเดลจะได้ไม่งง
+    - **ปรับสเกลข้อมูล (Feature Scaling):** ปรับช่วงของตัวเลขให้มาอยู่ในสเกลเดียวกัน
     """)
     st.code("""
 # ตัวอย่างโค้ดการเตรียมข้อมูลด้วย Pandas และ Scikit-Learn
@@ -80,7 +80,7 @@ X_scaled = scaler.fit_transform(X)
     """, language='python')
 
     st.header("Step 2: สร้างโมเดล Ensemble Learning")
-    st.write("เราใช้เทคนิค  **Voting Classifier** โดยนำโมเดล 3 ตัวมาช่วยกันโหวตตัดสินใจ (Hard Voting) เพื่อให้ผลลัพธ์แม่นยำกว่าการใช้โมเดลเดียว")
+    st.write("เราใช้เทคนิค Voting Classifier โดยนำโมเดล 3 ตัวมาช่วยกันโหวตตัดสินใจ (Hard Voting) เพื่อให้ผลลัพธ์แม่นยำกว่าการใช้โมเดลเดียว")
     st.code("""
 # ตัวอย่างโค้ดการสร้างโมเดล Ensemble
 from sklearn.linear_model import LogisticRegression
@@ -102,18 +102,18 @@ ensemble_model.fit(X_train_scaled, y_train)
     """, language='python')
 
 # ==========================================
-# --- หน้าที่ 2: อธิบายทฤษฎี NN (อัปเกรดเนื้อหา) ---
+# --- หน้าที่ 2: อธิบายทฤษฎี NN ---
 # ==========================================
 elif page == "2. ทฤษฎี Neural Network":
-    st.title("🧠 ทฤษฎีการสร้าง Neural Network")
-    st.write("Neural Network (หรือโครงข่ายประสาทเทียม) เลียนแบบการทำงานของสมองมนุษย์  โดยรับข้อมูลเข้ามา ประมวลผลผ่านชั้นต่างๆ (Layers) แล้วส่งผลลัพธ์ออกมาเป็นความน่าจะเป็น")
+    st.title("ทฤษฎีการสร้าง Neural Network")
+    st.write("Neural Network (โครงข่ายประสาทเทียม) เลียนแบบการทำงานของสมองมนุษย์ โดยรับข้อมูลเข้ามา ประมวลผลผ่านชั้นต่างๆ แล้วส่งผลลัพธ์ออกมาเป็นความน่าจะเป็น")
 
     st.header("Step 1: ออกแบบโครงสร้าง (Architecture)")
     st.write("เราใช้ไลบรารี TensorFlow/Keras ในการสร้างโมเดลแบบ Multi-Layer Perceptron (MLP) โดยมีโครงสร้าง 3 ชั้น:")
     st.markdown("""
-    1. **Hidden Layer 1:** มี 16 โหนด (ใช้ฟังก์ชันกระตุ้น `ReLU` เพื่อหาความสัมพันธ์ที่ซับซ้อน)
-    2. **Hidden Layer 2:** มี 8 โหนด (ใช้ `ReLU` กรองข้อมูลให้แคบลง)
-    3. **Output Layer:** มี 1 โหนด (ใช้ `Sigmoid` บีบผลลัพธ์ให้อยู่ระหว่าง 0 ถึง 1 หรือก็คือ 0-100%)
+    1. **Hidden Layer 1:** มี 16 โหนด (ใช้ฟังก์ชันกระตุ้น ReLU เพื่อหาความสัมพันธ์ที่ซับซ้อน)
+    2. **Hidden Layer 2:** มี 8 โหนด (ใช้ ReLU กรองข้อมูลให้แคบลง)
+    3. **Output Layer:** มี 1 โหนด (ใช้ Sigmoid บีบผลลัพธ์ให้อยู่ระหว่าง 0 ถึง 1 หรือก็คือ 0-100%)
     """)
     st.code("""
 # ตัวอย่างโค้ดการสร้างโครงสร้าง Neural Network
@@ -123,84 +123,86 @@ from tensorflow.keras.layers import Dense
 nn_model = Sequential([
     Dense(16, activation='relu', input_shape=(X_train.shape[1],)),
     Dense(8, activation='relu'),
-    Dense(1, activation='sigmoid') # ออก 1 โหนดเพื่อบอกว่า เป็น/ไม่เป็น
+    Dense(1, activation='sigmoid')
 ])
     """, language='python')
 
     st.header("Step 2: คอมไพล์และเทรนโมเดล (Compile & Train)")
-    st.write("หลังจากสร้างโครงสร้างเสร็จ ต้องกำหนดวิธีการเรียนรู้ (Optimizer) และวิธีการวัดความผิดพลาด (Loss Function) จากนั้นจึงโยนข้อมูลเข้าไปสอน (Train)")
+    st.write("หลังจากสร้างโครงสร้างเสร็จ ต้องกำหนดวิธีการเรียนรู้ (Optimizer) และวิธีการวัดความผิดพลาด (Loss Function) จากนั้นจึงทำการสอน (Train)")
     st.code("""
 # กำหนดการตั้งค่าการเรียนรู้
 nn_model.compile(
     optimizer='adam', 
-    loss='binary_crossentropy', # เหมาะกับงานทายผล 2 ทาง (0 หรือ 1)
+    loss='binary_crossentropy', # เหมาะกับงานทายผล 2 ทาง
     metrics=['accuracy']
 )
 
-# สั่งเทรนโมเดล (ให้โมเดลดูข้อมูลวนไปมา 50 รอบ)
+# สั่งเทรนโมเดล
 nn_model.fit(
     X_train_scaled, y_train, 
     epochs=50, 
     batch_size=16,
-    verbose=0 # ซ่อนข้อความระหว่างเทรนไม่ให้รกรุงรัง
+    verbose=0
 )
     """, language='python')
 
 # ==========================================
-# --- หน้าที่ 3: ทดสอบ ML (คงเดิม) ---
+# --- หน้าที่ 3: ทดสอบ ML ---
 # ==========================================
 elif page == "3. ทดสอบ Machine Learning":
-    st.title("⚙️ ทดสอบโมเดล Machine Learning")
+    st.title("ทดสอบโมเดล Machine Learning")
     scaled_data = get_user_input()
     
-    if st.button("🔍 ทำนายผลด้วย Machine Learning"):
+    if st.button("ทำนายผลด้วย Machine Learning"):
         prediction = ensemble_model.predict(scaled_data)
         if prediction[0] == 1:
-            st.error("🚨 ผลการทำนาย: มีความเสี่ยงเป็นโรคหัวใจ!")
+            st.error("ผลการทำนาย: มีความเสี่ยงเป็นโรคหัวใจ")
         else:
-            st.success("✅ ผลการทำนาย: ปกติ (ไม่มีความเสี่ยง)")
+            st.success("ผลการทำนาย: ปกติ (ไม่มีความเสี่ยง)")
             
-        st.info("💡 ข้อสังเกต: โมเดล Machine Learning แบบ Hard Voting จะฟันธงแค่ 'เป็น' หรือ 'ไม่เป็น' เท่านั้น (ไม่มีเปอร์เซ็นต์ความน่าจะเป็น)")
+        st.info("ข้อสังเกต: โมเดล Machine Learning แบบ Hard Voting จะจำแนกผลลัพธ์เป็นกลุ่มเด็ดขาด (เป็น/ไม่เป็น) โดยไม่มีการแสดงค่าความน่าจะเป็น")
 
 # ==========================================
-# --- หน้าที่ 4: ทดสอบ NN (มีกราฟ คงเดิม) ---
+# --- หน้าที่ 4: ทดสอบ NN (ปรับเป็นกราฟแท่งทางการ) ---
 # ==========================================
 elif page == "4. ทดสอบ Neural Network":
-    st.title("⚙️ ทดสอบโมเดล Neural Network")
+    st.title("ทดสอบโมเดล Neural Network")
     scaled_data = get_user_input()
     
-    if st.button("🔍 ทำนายผลด้วย Neural Network"):
+    if st.button("ทำนายผลด้วย Neural Network"):
         prediction_prob = nn_model.predict(scaled_data)[0][0]
-        percent_risk = prediction_prob * 100
+        prob_risk = prediction_prob * 100
+        prob_normal = 100 - prob_risk
         
-        # กราฟเข็มไมล์ (Gauge Chart)
-        fig = go.Figure(go.Indicator(
-            mode = "gauge+number",
-            value = percent_risk,
-            domain = {'x': [0, 1], 'y': [0, 1]},
-            title = {'text': "ระดับความเสี่ยงการเป็นโรคหัวใจ", 'font': {'size': 20}},
-            gauge = {
-                'axis': {'range': [0, 100], 'tickwidth': 1, 'tickcolor': "darkblue"},
-                'bar': {'color': "darkgray"},
-                'bgcolor': "white",
-                'borderwidth': 2,
-                'bordercolor': "gray",
-                'steps': [
-                    {'range': [0, 40], 'color': "#a5d6a7"},    
-                    {'range': [40, 70], 'color': "#fff59d"},    
-                    {'range': [70, 100], 'color': "#ef9a9a"}    
-                ],
-                'threshold': {
-                    'line': {'color': "red", 'width': 4},
-                    'thickness': 0.75,
-                    'value': percent_risk
-                }
-            }
-        ))
+        # กราฟแท่ง (Bar Chart) แบบเป็นทางการ
+        fig = go.Figure(data=[
+            go.Bar(
+                x=['ปกติ (Normal)', 'มีความเสี่ยง (Risk)'],
+                y=[prob_normal, prob_risk],
+                marker_color=['#2ca02c', '#d62728'], # สีเขียวและสีแดงทางการ
+                text=[f"{prob_normal:.2f}%", f"{prob_risk:.2f}%"],
+                textposition='auto',
+                width=0.4
+            )
+        ])
+        
+        fig.update_layout(
+            title_text='กราฟแสดงความน่าจะเป็นของการเกิดโรคหัวใจ',
+            yaxis=dict(title='ความน่าจะเป็น (%)', range=[0, 100]),
+            xaxis=dict(title='ผลการประเมิน'),
+            plot_bgcolor='white',
+            paper_bgcolor='white'
+        )
+        
+        # ใส่กรอบเส้นตารางให้ดูเป็นทางการ
+        fig.update_yaxes(showgrid=True, gridwidth=1, gridcolor='LightGray')
+        fig.update_xaxes(showline=True, linewidth=1, linecolor='black')
         
         st.plotly_chart(fig, use_container_width=True)
 
+        # สรุปผลลัพธ์ด้านล่าง
+        st.write("### สรุปผลการประเมิน")
         if prediction_prob > 0.5:
-            st.error(f"🚨 สรุปผล: มีความเสี่ยงเป็นโรคหัวใจ! (ความมั่นใจ {percent_risk:.2f}%)")
+            st.error(f"ตรวจพบความเสี่ยงการเป็นโรคหัวใจ ที่ระดับความน่าจะเป็น {prob_risk:.2f}%")
         else:
-            st.success(f"✅ สรุปผล: ปกติ (ความเสี่ยงเพียง {percent_risk:.2f}%)")
+            st.success(f"อยู่ในเกณฑ์ปกติ ระดับความเสี่ยงอยู่ที่ {prob_risk:.2f}%")
