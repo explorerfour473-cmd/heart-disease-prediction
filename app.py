@@ -89,10 +89,9 @@ def get_user_input():
     input_df = input_df.reindex(columns=model_columns, fill_value=0)
     scaled_input = scaler.transform(input_df)
     
-    # แก้ให้ส่งค่า user_data กลับมาด้วย เพื่อเอาไปวาดกราฟเรดาร์
     return scaled_input, user_data
 
-# --- ฟังก์ชันเสริม: วาดกราฟ Radar Chart ---
+# --- ฟังก์ชันเสริม: วาดกราฟ Radar Chart (อัปเดตความโปร่งใสแล้ว) ---
 def show_radar_chart(user_data):
     # กำหนดหัวข้อและค่าที่จะวาด (วนกลับไปจุดเริ่มต้นเพื่อปิดกราฟให้เป็นรูปปิด)
     categories = ['ความดันโลหิต', 'คอเลสเตอรอล', 'อัตราหัวใจสูงสุด', 'ความดันโลหิต']
@@ -110,7 +109,8 @@ def show_radar_chart(user_data):
         theta=categories,
         fill='toself',
         name='ค่ามาตรฐานคนปกติ (Normal)',
-        line_color='#2ca02c'
+        line_color='#2ca02c',
+        opacity=0.5  # 🟢 เพิ่มความโปร่งใสตรงนี้
     ))
 
     # กราฟของ User (สีแดง)
@@ -119,7 +119,8 @@ def show_radar_chart(user_data):
         theta=categories,
         fill='toself',
         name='ข้อมูลของคุณ (Your Data)',
-        line_color='#d62728'
+        line_color='#d62728',
+        opacity=0.6  # 🔴 เพิ่มความโปร่งใสตรงนี้
     ))
 
     fig.update_layout(
