@@ -15,6 +15,38 @@ def load_assets():
 
 model_columns, scaler, ensemble_model, nn_model = load_assets()
 
+# --- ฟังก์ชันฟอร์มกรอกข้อมูล (ย้ายมาไว้ข้างบน จะได้ไม่ Error) ---
+def get_user_input():
+    st.write("### กรอกข้อมูลคนไข้เพื่อประเมินความเสี่ยง")
+    col1, col2 = st.columns(2)
+    with col1:
+        age = st.number_input("อายุ (Age)", min_value=1, max_value=120, value=50)
+        sex = st.selectbox("เพศ (Sex)", ["Male", "Female"])
+        cp = st.selectbox("อาการเจ็บหน้าอก (Chest Pain)", ["typical angina", "atypical angina", "non-anginal", "asymptomatic"])
+        trestbps = st.number_input("ความดันโลหิต (Resting Blood Pressure)", min_value=50, max_value=250, value=120)
+    with col2:
+        chol = st.number_input("คอเลสเตอรอล (Cholesterol)", min_value=100, max_value=600, value=200)
+        thalch = st.number_input("อัตราการเต้นหัวใจสูงสุด (Max Heart Rate)", min_value=60, max_value=220, value=150)
+        fbs = st.selectbox("น้ำตาลในเลือด > 120 (Fasting Blood Sugar)", ["TRUE", "FALSE"])
+        exang = st.selectbox("เจ็บหน้าอกเวลาออกกำลังกาย (Exercise Induced Angina)", ["TRUE", "FALSE"])
+    
+    # สร้างเป็น DataFrame
+    user_data = {
+        'age': age, 'sex': sex, 'cp': cp, 'trestbps': trestbps, 
+        'chol': chol, 'thalch': thalch, 'fbs': fbs, 'exang': exang,
+        # ค่าอื่นๆ ที่ไม่ได้กรอก ให้ใส่ค่าเริ่มต้นกลางๆ เพื่อไม่ให้ Error
+        'restecg': 'normal', 'oldpeak': 0.0, 'slope': 'flat', 'ca': 0, 'thal': 'normal'
+    }
+    input_df = pd.DataFrame([user_data])
+    
+    # แปลงตัวหนังสือเป็นตัวเลข (ให้เหมือนตอนเทรน)
+    input_df = pd.get_dummies(input_df)
+    # จัดคอลัมน์ให้ตรงกับพิมพ์เขียว
+    input_df = input_df.reindex(columns=model_columns, fill_value=0)
+    # ปรับสเกลตัวเลข
+    scaled_input = scaler.transform(input_df)
+    return scaled_input
+
 # 2. ตั้งค่าเมนูด้านข้าง (Sidebar)
 st.sidebar.title("เมนูหลัก")
 page = st.sidebar.radio("เลือกหน้าต่างทำงาน:", 
@@ -47,38 +79,6 @@ elif page == "2. ทฤษฎี Neural Network":
     - **Output Layer:** มี 1 โหนด (Activation: Sigmoid) ให้ผลลัพธ์เป็นความน่าจะเป็น (0 ถึง 1)
     """)
     st.write("**แหล่งอ้างอิง:** ทฤษฎี Deep Learning พื้นฐาน, ไลบรารี TensorFlow/Keras")
-
-# --- ฟังก์ชันฟอร์มกรอกข้อมูล (ใช้ร่วมกันหน้าที่ 3 และ 4) ---
-def get_user_input():
-    st.write("### กรอกข้อมูลคนไข้เพื่อประเมินความเสี่ยง")
-    col1, col2 = st.columns(2)
-    with col1:
-        age = st.number_input("อายุ (Age)", min_value=1, max_value=120, value=50)
-        sex = st.selectbox("เพศ (Sex)", ["Male", "Female"])
-        cp = st.selectbox("อาการเจ็บหน้าอก (Chest Pain)", ["typical angina", "atypical angina", "non-anginal", "asymptomatic"])
-        trestbps = st.number_input("ความดันโลหิต (Resting Blood Pressure)", min_value=50, max_value=250, value=120)
-    with col2:
-        chol = st.number_input("คอเลสเตอรอล (Cholesterol)", min_value=100, max_value=600, value=200)
-        thalch = st.number_input("อัตราการเต้นหัวใจสูงสุด (Max Heart Rate)", min_value=60, max_value=220, value=150)
-        fbs = st.selectbox("น้ำตาลในเลือด > 120 (Fasting Blood Sugar)", ["TRUE", "FALSE"])
-        exang = st.selectbox("เจ็บหน้าอกเวลาออกกำลังกาย (Exercise Induced Angina)", ["TRUE", "FALSE"])
-    
-    # สร้างเป็น DataFrame
-    user_data = {
-        'age': age, 'sex': sex, 'cp': cp, 'trestbps': trestbps, 
-        'chol': chol, 'thalch': thalch, 'fbs': fbs, 'exang': exang,
-        # ค่าอื่นๆ ที่ไม่ได้กรอก ให้ใส่ค่าเริ่มต้นกลางๆ เพื่อไม่ให้ Error
-        'restecg': 'normal', 'oldpeak': 0.0, 'slope': 'flat', 'ca': 0, 'thal': 'normal'
-    }
-    input_df = pd.DataFrame([user_data])
-    
-    # แปลงตัวหนังสือเป็นตัวเลข (ให้เหมือนตอนเทรน)
-    input_df = pd.get_dummies(input_df)
-    # จัดคอลัมน์ให้ตรงกับพิมพ์เขียว
-    input_df = input_df.reindex(columns=model_columns, fill_value=0)
-    # ปรับสเกลตัวเลข
-    scaled_input = scaler.transform(input_df)
-    return scaled_input
 
 # --- หน้าที่ 3: ทดสอบ ML ---
 elif page == "3. ทดสอบ Machine Learning":
