@@ -44,7 +44,7 @@ def load_assets():
 
 model_columns, scaler, ensemble_model, nn_model = load_assets()
 
-# --- ฟังก์ชันฟอร์มกรอกข้อมูล (จัด Layout ใหม่เป็นหมวดหมู่) ---
+# --- ฟังก์ชันฟอร์มกรอกข้อมูล ---
 def get_user_input():
     st.markdown('<div class="section-header">แบบฟอร์มบันทึกข้อมูลผู้ป่วย (Patient Data Form)</div>', unsafe_allow_html=True)
     
@@ -88,7 +88,51 @@ def get_user_input():
     input_df = pd.get_dummies(input_df)
     input_df = input_df.reindex(columns=model_columns, fill_value=0)
     scaled_input = scaler.transform(input_df)
-    return scaled_input
+    
+    # แก้ให้ส่งค่า user_data กลับมาด้วย เพื่อเอาไปวาดกราฟเรดาร์
+    return scaled_input, user_data
+
+# --- ฟังก์ชันเสริม: วาดกราฟ Radar Chart ---
+def show_radar_chart(user_data):
+    # กำหนดหัวข้อและค่าที่จะวาด (วนกลับไปจุดเริ่มต้นเพื่อปิดกราฟให้เป็นรูปปิด)
+    categories = ['ความดันโลหิต', 'คอเลสเตอรอล', 'อัตราหัวใจสูงสุด', 'ความดันโลหิต']
+    
+    # ค่าของ User
+    user_values = [user_data['trestbps'], user_data['chol'], user_data['thalch'], user_data['trestbps']]
+    # ค่ามาตรฐานคนปกติ (โดยประมาณ)
+    normal_values = [120, 200, 150, 120]
+
+    fig = go.Figure()
+
+    # กราฟค่ามาตรฐาน (สีเขียว)
+    fig.add_trace(go.Scatterpolar(
+        r=normal_values,
+        theta=categories,
+        fill='toself',
+        name='ค่ามาตรฐานคนปกติ (Normal)',
+        line_color='#2ca02c'
+    ))
+
+    # กราฟของ User (สีแดง)
+    fig.add_trace(go.Scatterpolar(
+        r=user_values,
+        theta=categories,
+        fill='toself',
+        name='ข้อมูลของคุณ (Your Data)',
+        line_color='#d62728'
+    ))
+
+    fig.update_layout(
+        polar=dict(
+            radialaxis=dict(visible=True, range=[0, 300]) # ตั้งกรอบให้เห็นสูงสุด 300
+        ),
+        showlegend=True,
+        margin=dict(t=30, b=30, l=30, r=30)
+    )
+    
+    st.markdown('**กราฟเปรียบเทียบสุขภาพ (Health Radar)**')
+    st.write("เปรียบเทียบข้อมูลของคุณกับเกณฑ์มาตรฐาน หากเส้นสีแดงทะลุกรอบสีเขียวออกไปมาก ควรเฝ้าระวังเป็นพิเศษครับ")
+    st.plotly_chart(fig, use_container_width=True)
 
 # 4. ตั้งค่าเมนูด้านข้าง (Sidebar) แบบทางการ
 st.sidebar.markdown("### ระบบประเมินสุขภาพ")
@@ -103,7 +147,7 @@ st.sidebar.markdown("---")
 st.sidebar.caption("พัฒนาโดย: นายธิติภูมิ บุญภูมิ 6704062612235")
 
 # ==========================================
-# --- หน้าที่ 1: อธิบายทฤษฎี ML (เอาเนื้อหาจัดเต็มกลับมา) ---
+# --- หน้าทฤษฎี ML ---
 # ==========================================
 if page == "หน้าหลัก - ทฤษฎี Machine Learning":
     st.markdown('<div class="main-header">ทฤษฎีการสร้าง Machine Learning</div>', unsafe_allow_html=True)
@@ -153,7 +197,7 @@ ensemble_model.fit(X_train_scaled, y_train)
     """, language='python')
 
 # ==========================================
-# --- หน้าที่ 2: อธิบายทฤษฎี NN (เอาเนื้อหาจัดเต็มกลับมา) ---
+# --- หน้าทฤษฎี NN ---
 # ==========================================
 elif page == "หน้าหลัก - ทฤษฎี Neural Network":
     st.markdown('<div class="main-header">ทฤษฎีการสร้าง Neural Network</div>', unsafe_allow_html=True)
@@ -198,11 +242,11 @@ nn_model.fit(
     """, language='python')
 
 # ==========================================
-# --- หน้าที่ 3: ระบบประเมิน ML ---
+# --- หน้าประเมิน ML ---
 # ==========================================
 elif page == "ระบบประเมิน - Machine Learning":
     st.markdown('<div class="main-header">ระบบประเมินความเสี่ยง (Machine Learning)</div>', unsafe_allow_html=True)
-    scaled_data = get_user_input()
+    scaled_data, user_data = get_user_input()
     
     if st.button("ประมวลผลข้อมูล (Run Analysis)", type="primary"):
         prediction = ensemble_model.predict(scaled_data)
@@ -212,14 +256,17 @@ elif page == "ระบบประเมิน - Machine Learning":
         else:
             st.success("ผลการประเมิน: ปกติ (ไม่พบความเสี่ยงในระดับที่น่ากังวล)")
         
+        # แสดงกราฟเรดาร์
+        show_radar_chart(user_data)
+        
         st.info("ข้อสังเกต: โมเดล Machine Learning แบบ Hard Voting จะจำแนกผลลัพธ์เป็นกลุ่มเด็ดขาด (เป็น/ไม่เป็น) โดยไม่มีการแสดงค่าความน่าจะเป็น")
 
 # ==========================================
-# --- หน้าที่ 4: ระบบประเมิน NN ---
+# --- หน้าประเมิน NN ---
 # ==========================================
 elif page == "ระบบประเมิน - Neural Network":
     st.markdown('<div class="main-header">ระบบประเมินความเสี่ยง (Neural Network)</div>', unsafe_allow_html=True)
-    scaled_data = get_user_input()
+    scaled_data, user_data = get_user_input()
     
     if st.button("ประมวลผลข้อมูลเชิงลึก (Run Deep Analysis)", type="primary"):
         prediction_prob = nn_model.predict(scaled_data)[0][0]
@@ -228,7 +275,7 @@ elif page == "ระบบประเมิน - Neural Network":
         
         st.markdown('<div class="section-header">รายงานผลการวิเคราะห์เชิงลึก (Deep Analysis Report)</div>', unsafe_allow_html=True)
         
-        # ใช้ Metric แสดงตัวเลขแบบ Dashboard มืออาชีพ
+        # ใช้ Metric แสดงตัวเลขแบบ Dashboard
         col_res1, col_res2 = st.columns(2)
         with col_res1:
             st.metric(label="โอกาสที่จะอยู่ในเกณฑ์ปกติ", value=f"{prob_normal:.1f}%")
@@ -237,7 +284,7 @@ elif page == "ระบบประเมิน - Neural Network":
                       delta="พบความเสี่ยง" if prob_risk > 50 else "ปลอดภัย", 
                       delta_color="inverse")
         
-        # กราฟแท่งทางการ
+        # กราฟแท่ง
         fig = go.Figure(data=[
             go.Bar(
                 x=['ปกติ (Normal)', 'มีความเสี่ยง (Risk)'],
@@ -258,3 +305,7 @@ elif page == "ระบบประเมิน - Neural Network":
         fig.update_xaxes(showline=True, linewidth=1, linecolor='black')
         
         st.plotly_chart(fig, use_container_width=True)
+        
+        st.markdown("---")
+        # แสดงกราฟเรดาร์
+        show_radar_chart(user_data)
