@@ -100,18 +100,106 @@ page = st.sidebar.radio("",
      "ระบบประเมิน - Neural Network"]
 )
 st.sidebar.markdown("---")
-st.sidebar.caption("พัฒนาโดย: [ชื่อของคุณ/รหัสนักศึกษา]") # แก้ไขตรงนี้เป็นชื่อคุณได้เลยครับ
+st.sidebar.caption("พัฒนาโดย: [ชื่อของคุณ/รหัสนักศึกษา]")
 
 # ==========================================
+# --- หน้าที่ 1: อธิบายทฤษฎี ML (เอาเนื้อหาจัดเต็มกลับมา) ---
+# ==========================================
 if page == "หน้าหลัก - ทฤษฎี Machine Learning":
-    st.markdown('<div class="main-header">ทฤษฎีการสร้างโมเดล Machine Learning</div>', unsafe_allow_html=True)
-    st.write("ระบบนี้พัฒนาขึ้นเพื่อประเมินความเสี่ยงโรคหัวใจ โดยใช้เทคนิค Ensemble Learning (Voting Classifier) ประกอบด้วย Logistic Regression, Decision Tree และ K-Nearest Neighbors")
-    # (สามารถใส่โค้ดอธิบายเพิ่มเติมแบบเดิมได้)
+    st.markdown('<div class="main-header">ทฤษฎีการสร้าง Machine Learning</div>', unsafe_allow_html=True)
+    st.write("โปรเจคนี้ใช้ชุดข้อมูล Heart Disease จาก UCI โดยมีขั้นตอนการพัฒนาโมเดลตั้งแต่การเตรียมข้อมูลไปจนถึงการเทรน ดังนี้:")
+    
+    st.header("Step 1: การเตรียมข้อมูล (Data Preprocessing)")
+    st.write("คอมพิวเตอร์ไม่สามารถเข้าใจข้อมูลที่เป็นตัวหนังสือหรือช่องว่างได้ เราจึงต้องทำความสะอาดและแปลงข้อมูลก่อน:")
+    st.markdown("""
+    - **จัดการค่าว่าง (Missing Values):** ลบหรือเติมข้อมูลในช่องที่ว่างเปล่า
+    - **แปลงข้อความเป็นตัวเลข (One-Hot Encoding):** แปลงคอลัมน์เช่น เพศ, อาการเจ็บหน้าอก ให้เป็นตัวเลข 0 และ 1
+    - **ปรับสเกลข้อมูล (Feature Scaling):** ปรับช่วงของตัวเลขให้มาอยู่ในสเกลเดียวกัน
+    """)
+    st.code("""
+# ตัวอย่างโค้ดการเตรียมข้อมูลด้วย Pandas และ Scikit-Learn
+import pandas as pd
+from sklearn.preprocessing import StandardScaler
 
+# 1. โหลดข้อมูลและแปลงข้อความเป็น 0,1
+df = pd.read_csv('heart_disease_uci.csv')
+df_encoded = pd.get_dummies(df)
+
+# 2. ปรับสเกลข้อมูล (Scaling)
+scaler = StandardScaler()
+X_scaled = scaler.fit_transform(X)
+    """, language='python')
+
+    st.header("Step 2: สร้างโมเดล Ensemble Learning")
+    st.write("เราใช้เทคนิค Voting Classifier โดยนำโมเดล 3 ตัวมาช่วยกันโหวตตัดสินใจ (Hard Voting) เพื่อให้ผลลัพธ์แม่นยำกว่าการใช้โมเดลเดียว")
+    st.code("""
+# ตัวอย่างโค้ดการสร้างโมเดล Ensemble
+from sklearn.linear_model import LogisticRegression
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.ensemble import VotingClassifier
+
+# สร้างโมเดลลูก 3 ตัว
+model1 = LogisticRegression()
+model2 = DecisionTreeClassifier()
+model3 = KNeighborsClassifier()
+
+# มัดรวมเป็น Ensemble Model แล้วสั่งเทรน (fit)
+ensemble_model = VotingClassifier(
+    estimators=[('lr', model1), ('dt', model2), ('knn', model3)], 
+    voting='hard'
+)
+ensemble_model.fit(X_train_scaled, y_train)
+    """, language='python')
+
+# ==========================================
+# --- หน้าที่ 2: อธิบายทฤษฎี NN (เอาเนื้อหาจัดเต็มกลับมา) ---
+# ==========================================
 elif page == "หน้าหลัก - ทฤษฎี Neural Network":
-    st.markdown('<div class="main-header">ทฤษฎีการสร้างโครงข่ายประสาทเทียม (Neural Network)</div>', unsafe_allow_html=True)
-    st.write("ใช้สถาปัตยกรรมแบบ Multi-Layer Perceptron (MLP) จำนวน 3 ชั้น เพื่อสกัดคุณลักษณะแฝงและให้ผลลัพธ์เป็นค่าความน่าจะเป็น (Probability)")
+    st.markdown('<div class="main-header">ทฤษฎีการสร้าง Neural Network</div>', unsafe_allow_html=True)
+    st.write("Neural Network (โครงข่ายประสาทเทียม) เลียนแบบการทำงานของสมองมนุษย์ โดยรับข้อมูลเข้ามา ประมวลผลผ่านชั้นต่างๆ แล้วส่งผลลัพธ์ออกมาเป็นความน่าจะเป็น")
 
+    st.header("Step 1: ออกแบบโครงสร้าง (Architecture)")
+    st.write("เราใช้ไลบรารี TensorFlow/Keras ในการสร้างโมเดลแบบ Multi-Layer Perceptron (MLP) โดยมีโครงสร้าง 3 ชั้น:")
+    st.markdown("""
+    1. **Hidden Layer 1:** มี 16 โหนด (ใช้ฟังก์ชันกระตุ้น ReLU เพื่อหาความสัมพันธ์ที่ซับซ้อน)
+    2. **Hidden Layer 2:** มี 8 โหนด (ใช้ ReLU กรองข้อมูลให้แคบลง)
+    3. **Output Layer:** มี 1 โหนด (ใช้ Sigmoid บีบผลลัพธ์ให้อยู่ระหว่าง 0 ถึง 1 หรือก็คือ 0-100%)
+    """)
+    st.code("""
+# ตัวอย่างโค้ดการสร้างโครงสร้าง Neural Network
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Dense
+
+nn_model = Sequential([
+    Dense(16, activation='relu', input_shape=(X_train.shape[1],)),
+    Dense(8, activation='relu'),
+    Dense(1, activation='sigmoid')
+])
+    """, language='python')
+
+    st.header("Step 2: คอมไพล์และเทรนโมเดล (Compile & Train)")
+    st.write("หลังจากสร้างโครงสร้างเสร็จ ต้องกำหนดวิธีการเรียนรู้ (Optimizer) และวิธีการวัดความผิดพลาด (Loss Function) จากนั้นจึงทำการสอน (Train)")
+    st.code("""
+# กำหนดการตั้งค่าการเรียนรู้
+nn_model.compile(
+    optimizer='adam', 
+    loss='binary_crossentropy', # เหมาะกับงานทายผล 2 ทาง
+    metrics=['accuracy']
+)
+
+# สั่งเทรนโมเดล
+nn_model.fit(
+    X_train_scaled, y_train, 
+    epochs=50, 
+    batch_size=16,
+    verbose=0
+)
+    """, language='python')
+
+# ==========================================
+# --- หน้าที่ 3: ระบบประเมิน ML ---
+# ==========================================
 elif page == "ระบบประเมิน - Machine Learning":
     st.markdown('<div class="main-header">ระบบประเมินความเสี่ยง (Machine Learning)</div>', unsafe_allow_html=True)
     scaled_data = get_user_input()
@@ -123,7 +211,12 @@ elif page == "ระบบประเมิน - Machine Learning":
             st.error("คำเตือน: ระบบตรวจพบความเสี่ยงของการเกิดโรคหัวใจ แนะนำให้ปรึกษาแพทย์")
         else:
             st.success("ผลการประเมิน: ปกติ (ไม่พบความเสี่ยงในระดับที่น่ากังวล)")
+        
+        st.info("ข้อสังเกต: โมเดล Machine Learning แบบ Hard Voting จะจำแนกผลลัพธ์เป็นกลุ่มเด็ดขาด (เป็น/ไม่เป็น) โดยไม่มีการแสดงค่าความน่าจะเป็น")
 
+# ==========================================
+# --- หน้าที่ 4: ระบบประเมิน NN ---
+# ==========================================
 elif page == "ระบบประเมิน - Neural Network":
     st.markdown('<div class="main-header">ระบบประเมินความเสี่ยง (Neural Network)</div>', unsafe_allow_html=True)
     scaled_data = get_user_input()
