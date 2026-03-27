@@ -4,10 +4,8 @@ import numpy as np
 import joblib
 from tensorflow.keras.models import load_model
 import plotly.graph_objects as go
-import shap  # 🔍 เพิ่มไลบรารี AI ให้เหตุผล
-import matplotlib.pyplot as plt # เอาไว้ช่วยวาดกราฟเบื้องหลัง
 
-# 1. ตั้งค่าหน้าเพจ
+# 1. ตั้งค่าหน้าเพจ (ต้องอยู่บรรทัดแรกสุดของ Streamlit)
 st.set_page_config(
     page_title="ระบบประเมินความเสี่ยงโรคหัวใจ",
     layout="wide",
@@ -31,12 +29,6 @@ st.markdown("""
         padding-bottom: 5px;
         margin-top: 20px;
         margin-bottom: 15px;
-    }
-    .shap-explanation {
-        background-color: #f8f9fa;
-        border-radius: 10px;
-        padding: 15px;
-        border-left: 5px solid #1565c0;
     }
 </style>
 """, unsafe_allow_html=True)
@@ -96,9 +88,7 @@ def get_user_input():
     input_df = pd.get_dummies(input_df)
     input_df = input_df.reindex(columns=model_columns, fill_value=0)
     scaled_input = scaler.transform(input_df)
-    
-    # ส่งคืนทั้ง scaled_input และ DataFrame ต้นฉบับ (เอาไว้ทำ SHAP)
-    return scaled_input, input_df
+    return scaled_input
 
 # 4. ตั้งค่าเมนูด้านข้าง (Sidebar) แบบทางการ
 st.sidebar.markdown("### ระบบประเมินสุขภาพ")
@@ -110,16 +100,22 @@ page = st.sidebar.radio("",
      "ระบบประเมิน - Neural Network"]
 )
 st.sidebar.markdown("---")
-st.sidebar.caption("พัฒนาโดย: นายธิติภูมิ บุญภูมิ  6704062612235")
+st.sidebar.caption("พัฒนาโดย: นายธิติภูมิ บุญภูมิ 6704062612235")
 
 # ==========================================
-# --- หน้าทฤษฎี (คงเดิม) ---
+# --- หน้าที่ 1: อธิบายทฤษฎี ML (เอาเนื้อหาจัดเต็มกลับมา) ---
 # ==========================================
 if page == "หน้าหลัก - ทฤษฎี Machine Learning":
-    st.markdown('<div class="main-header">ทฤษฎีการสร้างโมเดล Machine Learning</div>', unsafe_allow_html=True)
+    st.markdown('<div class="main-header">ทฤษฎีการสร้าง Machine Learning</div>', unsafe_allow_html=True)
     st.write("โปรเจคนี้ใช้ชุดข้อมูล Heart Disease จาก UCI โดยมีขั้นตอนการพัฒนาโมเดลตั้งแต่การเตรียมข้อมูลไปจนถึงการเทรน ดังนี้:")
+    
     st.header("Step 1: การเตรียมข้อมูล (Data Preprocessing)")
     st.write("คอมพิวเตอร์ไม่สามารถเข้าใจข้อมูลที่เป็นตัวหนังสือหรือช่องว่างได้ เราจึงต้องทำความสะอาดและแปลงข้อมูลก่อน:")
+    st.markdown("""
+    - **จัดการค่าว่าง (Missing Values):** ลบหรือเติมข้อมูลในช่องที่ว่างเปล่า
+    - **แปลงข้อความเป็นตัวเลข (One-Hot Encoding):** แปลงคอลัมน์เช่น เพศ, อาการเจ็บหน้าอก ให้เป็นตัวเลข 0 และ 1
+    - **ปรับสเกลข้อมูล (Feature Scaling):** ปรับช่วงของตัวเลขให้มาอยู่ในสเกลเดียวกัน
+    """)
     st.code("""
 # ตัวอย่างโค้ดการเตรียมข้อมูลด้วย Pandas และ Scikit-Learn
 import pandas as pd
@@ -133,7 +129,9 @@ df_encoded = pd.get_dummies(df)
 scaler = StandardScaler()
 X_scaled = scaler.fit_transform(X)
     """, language='python')
+
     st.header("Step 2: สร้างโมเดล Ensemble Learning")
+    st.write("เราใช้เทคนิค Voting Classifier โดยนำโมเดล 3 ตัวมาช่วยกันโหวตตัดสินใจ (Hard Voting) เพื่อให้ผลลัพธ์แม่นยำกว่าการใช้โมเดลเดียว")
     st.code("""
 # ตัวอย่างโค้ดการสร้างโมเดล Ensemble
 from sklearn.linear_model import LogisticRegression
@@ -154,11 +152,22 @@ ensemble_model = VotingClassifier(
 ensemble_model.fit(X_train_scaled, y_train)
     """, language='python')
 
+# ==========================================
+# --- หน้าที่ 2: อธิบายทฤษฎี NN (เอาเนื้อหาจัดเต็มกลับมา) ---
+# ==========================================
 elif page == "หน้าหลัก - ทฤษฎี Neural Network":
-    st.markdown('<div class="main-header">ทฤษฎีการสร้างโครงข่ายประสาทเทียม (Neural Network)</div>', unsafe_allow_html=True)
+    st.markdown('<div class="main-header">ทฤษฎีการสร้าง Neural Network</div>', unsafe_allow_html=True)
     st.write("Neural Network (โครงข่ายประสาทเทียม) เลียนแบบการทำงานของสมองมนุษย์ โดยรับข้อมูลเข้ามา ประมวลผลผ่านชั้นต่างๆ แล้วส่งผลลัพธ์ออกมาเป็นความน่าจะเป็น")
+
     st.header("Step 1: ออกแบบโครงสร้าง (Architecture)")
+    st.write("เราใช้ไลบรารี TensorFlow/Keras ในการสร้างโมเดลแบบ Multi-Layer Perceptron (MLP) โดยมีโครงสร้าง 3 ชั้น:")
+    st.markdown("""
+    1. **Hidden Layer 1:** มี 16 โหนด (ใช้ฟังก์ชันกระตุ้น ReLU เพื่อหาความสัมพันธ์ที่ซับซ้อน)
+    2. **Hidden Layer 2:** มี 8 โหนด (ใช้ ReLU กรองข้อมูลให้แคบลง)
+    3. **Output Layer:** มี 1 โหนด (ใช้ Sigmoid บีบผลลัพธ์ให้อยู่ระหว่าง 0 ถึง 1 หรือก็คือ 0-100%)
+    """)
     st.code("""
+# ตัวอย่างโค้ดการสร้างโครงสร้าง Neural Network
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense
 
@@ -169,94 +178,48 @@ nn_model = Sequential([
 ])
     """, language='python')
 
+    st.header("Step 2: คอมไพล์และเทรนโมเดล (Compile & Train)")
+    st.write("หลังจากสร้างโครงสร้างเสร็จ ต้องกำหนดวิธีการเรียนรู้ (Optimizer) และวิธีการวัดความผิดพลาด (Loss Function) จากนั้นจึงทำการสอน (Train)")
+    st.code("""
+# กำหนดการตั้งค่าการเรียนรู้
+nn_model.compile(
+    optimizer='adam', 
+    loss='binary_crossentropy', # เหมาะกับงานทายผล 2 ทาง
+    metrics=['accuracy']
+)
+
+# สั่งเทรนโมเดล
+nn_model.fit(
+    X_train_scaled, y_train, 
+    epochs=50, 
+    batch_size=16,
+    verbose=0
+)
+    """, language='python')
+
 # ==========================================
-# --- ระบบประเมิน - Machine Learning (เพิ่มระบบให้เหตุผล) ---
+# --- หน้าที่ 3: ระบบประเมิน ML ---
 # ==========================================
 elif page == "ระบบประเมิน - Machine Learning":
     st.markdown('<div class="main-header">ระบบประเมินความเสี่ยง (Machine Learning)</div>', unsafe_allow_html=True)
-    scaled_data, raw_data = get_user_input()  # รับข้อมูล 2 แบบ
+    scaled_data = get_user_input()
     
     if st.button("ประมวลผลข้อมูล (Run Analysis)", type="primary"):
-        st.markdown('<div class="section-header">ผลการประเมินและการวิเคราะห์ปัจจัย (Analysis Result)</div>', unsafe_allow_html=True)
-        
-        # 1. ทำนายผลปกติ
         prediction = ensemble_model.predict(scaled_data)
+        st.markdown('<div class="section-header">ผลการประเมิน (Assessment Result)</div>', unsafe_allow_html=True)
         if prediction[0] == 1:
             st.error("คำเตือน: ระบบตรวจพบความเสี่ยงของการเกิดโรคหัวใจ แนะนำให้ปรึกษาแพทย์")
         else:
             st.success("ผลการประเมิน: ปกติ (ไม่พบความเสี่ยงในระดับที่น่ากังวล)")
         
-        st.write("---")
-        
-        # 2. 🔍 เริ่มระบบ AI ให้เหตุผล (SHAP)
-        st.subheader("ปัจจัยที่มีผลต่อการทำนาย (Explanation Factors)")
-        
-        # คำนวณ SHAP Values (ใช้ KernelExplainer สำหรับ Ensemble model)
-        # เนื่องจากคำนวณนาน เราจะใช้ข้อมูลปัจจุบันตัวเดียวเป็นพื้นฐานเพื่อความเร็ว
-        with st.spinner("โมเดลกำลังวิเคราะห์เหตุผลเชิงลึก... (อาจใช้เวลา 10-20 วินาที)"):
-            explainer = shap.Explainer(ensemble_model.predict, scaled_data)
-            shap_values = explainer(scaled_data)
-        
-        # แปลงค่า SHAP เป็นเปอร์เซ็นต์ความเข้าใจง่าย (เชิงบวก=เสี่ยงเพิ่ม, เชิงลบ=เสี่ยงลด)
-        current_shap_values = shap_values.values[0]
-        feature_names = model_columns
-        
-        # กรองเอาเฉพาะปัจจัยที่มีผลเยอะๆ มาโชว์ (top 10)
-        shap_data = pd.DataFrame({
-            'Feature': feature_names,
-            'Influence': current_shap_values
-        })
-        shap_data = shap_data.sort_values(by='Influence', ascending=True).tail(10) # เอาตัวที่มีผลมากสุด (ทั้งบวกและลบ)
-        
-        # กำหนดสี (แดง=เสี่ยงเพิ่ม, เขียว=เสี่ยงลด)
-        shap_data['Color'] = shap_data['Influence'].apply(lambda x: '#d62728' if x > 0 else '#2ca02c')
-        shap_data['Label'] = shap_data['Influence'].apply(lambda x: 'เพิ่มความเสี่ยง' if x > 0 else 'ลดความเสี่ยง')
-        
-        # สร้างกราฟ Plotly Horizontal Bar Chart
-        fig_shap = go.Figure(data=[
-            go.Bar(
-                x=shap_data['Influence'],
-                y=shap_data['Feature'],
-                orientation='h',
-                marker_color=shap_data['Color'],
-                text=shap_data['Label'],
-                textposition='auto',
-            )
-        ])
-        
-        fig_shap.update_layout(
-            title_text='กราฟวิเคราะห์ปัจจัยที่มีผลต่อคำทำนาย (SHAP Importance)',
-            xaxis=dict(title='ระดับอิทธิพลต่อคำทำนาย (Influence Scale)'),
-            yaxis=dict(title='ปัจจัยตรวจสุขภาพ'),
-            plot_bgcolor='white',
-            paper_bgcolor='white',
-            height=400,
-            margin=dict(l=150) # เว้นที่ด้านซ้ายให้ชื่อตัวแปร
-        )
-        
-        st.plotly_chart(fig_shap, use_container_width=True)
-        
-        # เพิ่มคำอธิบายกราฟแบบเข้าใจง่าย
-        st.markdown("""
-        <div class="shap-explanation">
-        <strong>💡 วิธีอ่านกราฟ:</strong>
-        <ul>
-            <li><span style="color:#d62728; font-weight:bold;">แท่งสีแดงพุ่งไปทางขวา:</span> แปลว่าปัจจัยนี้ <strong>"ทำให้คุณเสี่ยงเป็นโรคหัวใจเพิ่มขึ้น"</strong> (ยิ่งยาว ยิ่งอันตราย)</li>
-            <li><span style="color:#2ca02c; font-weight:bold;">แท่งสีเขียวพุ่งไปทางซ้าย:</span> แปลว่าปัจจัยนี้ <strong>"ช่วยลดความเสี่ยงหรือทำให้คุณดูปกติ"</strong></li>
-        </ul>
-        โมเดล AI ตัดสินใจจากผลรวมของแท่งสีแดงและสีเขียวทั้งหมดนี้ครับ
-        </div>
-        """, unsafe_allow_html=True)
-        
-        st.write("---")
         st.info("ข้อสังเกต: โมเดล Machine Learning แบบ Hard Voting จะจำแนกผลลัพธ์เป็นกลุ่มเด็ดขาด (เป็น/ไม่เป็น) โดยไม่มีการแสดงค่าความน่าจะเป็น")
 
 # ==========================================
-# --- ระบบประเมิน - Neural Network (คงเดิม) ---
+# --- หน้าที่ 4: ระบบประเมิน NN ---
 # ==========================================
 elif page == "ระบบประเมิน - Neural Network":
     st.markdown('<div class="main-header">ระบบประเมินความเสี่ยง (Neural Network)</div>', unsafe_allow_html=True)
-    scaled_data, raw_data = get_user_input()
+    scaled_data = get_user_input()
     
     if st.button("ประมวลผลข้อมูลเชิงลึก (Run Deep Analysis)", type="primary"):
         prediction_prob = nn_model.predict(scaled_data)[0][0]
@@ -265,6 +228,7 @@ elif page == "ระบบประเมิน - Neural Network":
         
         st.markdown('<div class="section-header">รายงานผลการวิเคราะห์เชิงลึก (Deep Analysis Report)</div>', unsafe_allow_html=True)
         
+        # ใช้ Metric แสดงตัวเลขแบบ Dashboard มืออาชีพ
         col_res1, col_res2 = st.columns(2)
         with col_res1:
             st.metric(label="โอกาสที่จะอยู่ในเกณฑ์ปกติ", value=f"{prob_normal:.1f}%")
@@ -273,6 +237,7 @@ elif page == "ระบบประเมิน - Neural Network":
                       delta="พบความเสี่ยง" if prob_risk > 50 else "ปลอดภัย", 
                       delta_color="inverse")
         
+        # กราฟแท่งทางการ
         fig = go.Figure(data=[
             go.Bar(
                 x=['ปกติ (Normal)', 'มีความเสี่ยง (Risk)'],
