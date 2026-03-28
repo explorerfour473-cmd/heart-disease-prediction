@@ -111,93 +111,100 @@ def get_user_input():
 # --- ฟังก์ชันเสริม: แดชบอร์ดสุขภาพส่วนบุคคล (Personal Health Dashboard) ---
 def show_personal_health_dashboard(user_data):
     st.markdown('<div class="section-header">แดชบอร์ดสรุปสุขภาพส่วนบุคคล (Personal Health Dashboard)</div>', unsafe_allow_html=True)
+    st.write("แสดงค่าสุขภาพของคุณเปรียบเทียบกับช่วงเกณฑ์: สีเขียว (ปกติ), สีเหลือง (เฝ้าระวัง) และสีแดง (ความเสี่ยงสูง)")
+    st.write("") # เว้นบรรทัดลดความแออัด
     
     col1, col2, col3 = st.columns(3)
     
-    # 1. เกจวัดความดันโลหิต
-    fig_bp = go.Figure(go.Indicator(
-        mode="gauge+number",
-        value=user_data['trestbps'],
-        title={'text': "ความดันโลหิต (mmHg)", 'font': {'size': 16}},
-        gauge={
-            'axis': {'range': [None, 250]},
-            'bar': {'color': "rgba(0,0,0,0)"}, # ซ่อนบาร์หลักเพื่อใช้สีจาก steps
-            'steps': [
-                {'range': [0, 120], 'color': "#a5d6a7"}, # ปกติ (เขียว)
-                {'range': [120, 130], 'color': "#fff59d"}, # เฝ้าระวัง (เหลือง)
-                {'range': [130, 250], 'color': "#ef9a9a"}  # สูง (แดง)
-            ],
-            'threshold': {
-                'line': {'color': "black", 'width': 3},
-                'thickness': 0.75,
-                'value': user_data['trestbps']
+    # กำหนดความสูงและระยะขอบของกราฟให้สมดุล
+    chart_layout = dict(height=150, margin=dict(t=10, b=20, l=15, r=15))
+    
+    # 1. กราฟความดันโลหิต (Bullet Chart)
+    with col1:
+        st.markdown("**🩺 ความดันโลหิต (Resting BP)**")
+        fig_bp = go.Figure(go.Indicator(
+            mode = "number+gauge",
+            value = user_data['trestbps'],
+            number = {'suffix': " mmHg", 'font': {'size': 24, 'color': '#2c3e50'}},
+            gauge = {
+                'shape': "bullet",
+                'axis': {'range': [None, 250]},
+                'bar': {'color': "#2c3e50", 'thickness': 0.4}, 
+                'steps': [
+                    {'range': [0, 120], 'color': "#d4edda"},   # ปกติ (เขียวอ่อน)
+                    {'range': [120, 130], 'color': "#fff3cd"}, # เฝ้าระวัง (เหลืองอ่อน)
+                    {'range': [130, 250], 'color': "#f8d7da"}  # สูง (แดงอ่อน)
+                ],
+                'threshold': {'line': {'color': "black", 'width': 2}, 'thickness': 0.75, 'value': 120}
             }
-        }
-    ))
-    fig_bp.update_layout(height=250, margin=dict(l=10, r=10, t=30, b=10))
-    col1.plotly_chart(fig_bp, use_container_width=True)
+        ))
+        fig_bp.update_layout(**chart_layout)
+        st.plotly_chart(fig_bp, use_container_width=True)
 
-    # 2. เกจวัดคอเลสเตอรอล
-    fig_chol = go.Figure(go.Indicator(
-        mode="gauge+number",
-        value=user_data['chol'],
-        title={'text': "คอเลสเตอรอล (mg/dl)", 'font': {'size': 16}},
-        gauge={
-            'axis': {'range': [None, 400]},
-            'bar': {'color': "rgba(0,0,0,0)"},
-            'steps': [
-                {'range': [0, 200], 'color': "#a5d6a7"}, # ปกติ (เขียว)
-                {'range': [200, 240], 'color': "#fff59d"}, # เริ่มสูง (เหลือง)
-                {'range': [240, 400], 'color': "#ef9a9a"}  # สูง (แดง)
-            ],
-            'threshold': {
-                'line': {'color': "black", 'width': 3},
-                'thickness': 0.75,
-                'value': user_data['chol']
+    # 2. กราฟคอเลสเตอรอล (Bullet Chart)
+    with col2:
+        st.markdown("**🩸 คอเลสเตอรอล (Cholesterol)**")
+        fig_chol = go.Figure(go.Indicator(
+            mode = "number+gauge",
+            value = user_data['chol'],
+            number = {'suffix': " mg/dl", 'font': {'size': 24, 'color': '#2c3e50'}},
+            gauge = {
+                'shape': "bullet",
+                'axis': {'range': [None, 400]},
+                'bar': {'color': "#2c3e50", 'thickness': 0.4},
+                'steps': [
+                    {'range': [0, 200], 'color': "#d4edda"},   # ปกติ
+                    {'range': [200, 240], 'color': "#fff3cd"}, # เริ่มสูง
+                    {'range': [240, 400], 'color': "#f8d7da"}  # สูง
+                ],
+                'threshold': {'line': {'color': "black", 'width': 2}, 'thickness': 0.75, 'value': 200}
             }
-        }
-    ))
-    fig_chol.update_layout(height=250, margin=dict(l=10, r=10, t=30, b=10))
-    col2.plotly_chart(fig_chol, use_container_width=True)
+        ))
+        fig_chol.update_layout(**chart_layout)
+        st.plotly_chart(fig_chol, use_container_width=True)
 
-    # 3. เกจวัดอัตราหัวใจสูงสุด (อ้างอิงจากอายุ)
+    # 3. กราฟอัตราหัวใจสูงสุด (Bullet Chart)
     max_hr = 220 - user_data['age'] # สูตรคำนวณ Max HR
-    fig_hr = go.Figure(go.Indicator(
-        mode="gauge+number+delta",
-        value=user_data['thalch'],
-        title={'text': f"อัตราหัวใจสูงสุด (Max: {max_hr})", 'font': {'size': 16}},
-        delta={'reference': max_hr, 'increasing': {'color': "red"}, 'decreasing': {'color': "green"}},
-        gauge={
-            'axis': {'range': [None, 220]},
-            'bar': {'color': "#64b5f6"},
-            'threshold': {
-                'line': {'color': "red", 'width': 2},
-                'thickness': 0.75,
-                'value': max_hr
+    with col3:
+        st.markdown(f"**❤️ อัตราหัวใจสูงสุด (Max: {max_hr} bpm)**")
+        fig_hr = go.Figure(go.Indicator(
+            mode = "number+gauge",
+            value = user_data['thalch'],
+            number = {'suffix': " bpm", 'font': {'size': 24, 'color': '#2c3e50'}},
+            gauge = {
+                'shape': "bullet",
+                'axis': {'range': [None, 220]},
+                'bar': {'color': "#2c3e50", 'thickness': 0.4},
+                'steps': [
+                    {'range': [0, max_hr * 0.5], 'color': "#e2e3e5"},         # ต่ำไป (เทา)
+                    {'range': [max_hr * 0.5, max_hr * 0.85], 'color': "#d4edda"}, # ช่วงที่เหมาะสม (เขียว)
+                    {'range': [max_hr * 0.85, 220], 'color': "#f8d7da"}       # สูงเกินไป (แดง)
+                ],
+                'threshold': {'line': {'color': "red", 'width': 2}, 'thickness': 0.75, 'value': max_hr}
             }
-        }
-    ))
-    fig_hr.update_layout(height=250, margin=dict(l=10, r=10, t=30, b=10))
-    col3.plotly_chart(fig_hr, use_container_width=True)
+        ))
+        fig_hr.update_layout(**chart_layout)
+        st.plotly_chart(fig_hr, use_container_width=True)
 
     # --- กล่องข้อความสรุปคำแนะนำ ---
-    st.markdown("**การวิเคราะห์ค่าสุขภาพเบื้องต้น:**")
+    st.markdown("---")
+    st.markdown("**📋 สรุปการวิเคราะห์ค่าสุขภาพเบื้องต้น:**")
     
     # วิเคราะห์ความดัน
     if user_data['trestbps'] > 130:
-        st.warning(f"ความดันโลหิตของคุณ ({user_data['trestbps']} mmHg) อยู่ในเกณฑ์ **สูง** ควรลดการบริโภคโซเดียมและปรึกษาแพทย์")
+        st.warning(f"• **ความดันโลหิต:** {user_data['trestbps']} mmHg (อยู่ในเกณฑ์ **สูง**) ควรลดการบริโภคโซเดียมและปรึกษาแพทย์")
     elif user_data['trestbps'] > 120:
-        st.info(f"ความดันโลหิตของคุณ ({user_data['trestbps']} mmHg) อยู่ในเกณฑ์ **ค่อนข้างสูง** ควรเฝ้าระวังพฤติกรรมการทานอาหาร")
+        st.info(f"• **ความดันโลหิต:** {user_data['trestbps']} mmHg (อยู่ในเกณฑ์ **ค่อนข้างสูง**) ควรเฝ้าระวังพฤติกรรมการทานอาหาร")
     else:
-        st.success(f"ความดันโลหิตของคุณ ({user_data['trestbps']} mmHg) อยู่ในเกณฑ์ **ปกติ**")
+        st.success(f"• **ความดันโลหิต:** {user_data['trestbps']} mmHg (อยู่ในเกณฑ์ **ปกติ**)")
 
     # วิเคราะห์คอเลสเตอรอล
     if user_data['chol'] > 240:
-        st.warning(f"คอเลสเตอรอลของคุณ ({user_data['chol']} mg/dl) อยู่ในเกณฑ์ **สูง** เสี่ยงต่อการเกิดหลอดเลือดอุดตัน ควรหลีกเลี่ยงของมันของทอด")
+        st.warning(f"• **คอเลสเตอรอล:** {user_data['chol']} mg/dl (อยู่ในเกณฑ์ **สูง**) เสี่ยงต่อการเกิดหลอดเลือดอุดตัน ควรหลีกเลี่ยงอาหารมัน/ทอด")
     elif user_data['chol'] > 200:
-        st.info(f"คอเลสเตอรอลของคุณ ({user_data['chol']} mg/dl) อยู่ในเกณฑ์ **เริ่มสูง** ควรควบคุมอาหาร")
+        st.info(f"• **คอเลสเตอรอล:** {user_data['chol']} mg/dl (อยู่ในเกณฑ์ **เริ่มสูง**) ควรเริ่มควบคุมอาหาร")
     else:
-        st.success(f"คอเลสเตอรอลของคุณ ({user_data['chol']} mg/dl) อยู่ในเกณฑ์ **ปกติ**")
+        st.success(f"• **คอเลสเตอรอล:** {user_data['chol']} mg/dl (อยู่ในเกณฑ์ **ปกติ**)")
 
 # --- ฟังก์ชันเสริม: วาดกราฟ Radar Chart ---
 def show_radar_chart(user_data):
