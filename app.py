@@ -136,7 +136,7 @@ def show_radar_chart(user_data):
         margin=dict(t=30, b=30, l=30, r=30)
     )
     
-    st.markdown('**กราเปรียบเทียบสุขภาพ (Health Radar)**')
+    st.markdown('**กราฟเปรียบเทียบสุขภาพ (Health Radar)**')
     st.write("เปรียบเทียบข้อมูลของคุณกับเกณฑ์มาตรฐาน (เส้นปะสีเขียว) หากพื้นที่สีแดงทะลุกรอบเส้นปะออกไปมาก ควรเฝ้าระวังเป็นพิเศษครับ")
     st.plotly_chart(fig, use_container_width=True)
 
@@ -191,45 +191,42 @@ if page == "หน้าแรก (Home)":
 # --- หน้าทฤษฎี ML ---
 # ==========================================
 elif page == "หน้าหลัก - ทฤษฎี Machine Learning":
-    st.markdown('<div class="main-header">ทฤษฎีการสร้าง Machine Learning</div>', unsafe_allow_html=True)
-    st.write("โปรเจคนี้ใช้ชุดข้อมูล Heart Disease จาก UCI โดยมีขั้นตอนการพัฒนาโมเดลตั้งแต่การเตรียมข้อมูลไปจนถึงการเทรน ดังนี้:")
+    st.markdown('<div class="main-header">แนวทางการพัฒนาและทฤษฎี Machine Learning</div>', unsafe_allow_html=True)
     
-    st.header("Step 1: การเตรียมข้อมูล (Data Preprocessing)")
-    st.write("คอมพิวเตอร์ไม่สามารถเข้าใจข้อมูลที่เป็นตัวหนังสือหรือช่องว่างได้ เราจึงต้องทำความสะอาดและแปลงข้อมูลก่อน:")
+    st.markdown("### 1. แหล่งอ้างอิงข้อมูล (Data Source)")
+    st.write("โครงการนี้ใช้ชุดข้อมูล **Heart Disease Dataset** จาก **UCI Machine Learning Repository** (Cleveland database) ซึ่งประกอบด้วยข้อมูลผู้ป่วยจำนวน 303 ราย และคุณลักษณะ (Features) ที่เกี่ยวข้องกับสุขภาพหัวใจจำนวน 13 ตัวแปร เช่น อายุ, เพศ, ความดันโลหิต, คอเลสเตอรอล และผลตรวจทางห้องปฏิบัติการอื่นๆ")
+
+    st.markdown("### 2. การเตรียมข้อมูลและขั้นตอนการพัฒนาโมเดล (Data Preparation & Development Steps)")
+    st.write("เพื่อให้คอมพิวเตอร์สามารถเรียนรู้และสร้างโมเดลที่มีประสิทธิภาพ ได้มีการดำเนินการตามขั้นตอนดังต่อไปนี้:")
     st.markdown("""
-    - **จัดการค่าว่าง (Missing Values):** ลบหรือเติมข้อมูลในช่องที่ว่างเปล่า
-    - **แปลงข้อความเป็นตัวเลข (One-Hot Encoding):** แปลงคอลัมน์เช่น เพศ, อาการเจ็บหน้าอก ให้เป็นตัวเลข 0 และ 1
-    - **ปรับสเกลข้อมูล (Feature Scaling):** ปรับช่วงของตัวเลขให้มาอยู่ในสเกลเดียวกัน
+    - **การทำความสะอาดข้อมูล (Data Cleaning):** ตรวจสอบและจัดการค่าสูญหาย (Missing Values) ในชุดข้อมูล
+    - **การแปลงข้อมูลกลุ่ม (Categorical Encoding):** แปลงข้อมูลตัวอักษรให้เป็นตัวเลขด้วยเทคนิค One-Hot Encoding (เช่น การแปลงประเภทการเจ็บหน้าอกเป็น 0 และ 1) เพื่อให้โมเดลทางคณิตศาสตร์สามารถประมวลผลได้
+    - **การปรับสเกลข้อมูล (Feature Scaling):** ปรับค่าตัวเลขที่มีหน่วยแตกต่างกันให้อยู่ในสเกลมาตรฐานเดียวกันด้วยวิธี `StandardScaler` เพื่อป้องกันไม่ให้ตัวแปรที่มีค่ามากมีอิทธิพลต่อโมเดลมากเกินไป
+    - **การแบ่งชุดข้อมูล (Train-Test Split):** แบ่งข้อมูลสำหรับฝึกสอนโมเดล (Training Set) 80% และข้อมูลสำหรับทดสอบ (Testing Set) 20% เพื่อใช้วัดประสิทธิภาพการทำนายผล
     """)
+
+    st.markdown("### 3. ทฤษฎีของอัลกอริทึมที่พัฒนา (Algorithm Theory)")
+    st.write("ระบบนี้ประยุกต์ใช้เทคนิค **Ensemble Learning** แบบ **Hard Voting Classifier** ซึ่งเป็นการสร้างความแม่นยำด้วยการนำโมเดลพื้นฐาน 3 โมเดลมาทำงานร่วมกัน ได้แก่:")
+    st.markdown("""
+    - **Logistic Regression:** วิเคราะห์ความสัมพันธ์เชิงเส้นเพื่อแยกแยะกลุ่มเป้าหมาย
+    - **Decision Tree Classifier:** สร้างเงื่อนไขการตัดสินใจในรูปแบบโครงสร้างต้นไม้
+    - **K-Nearest Neighbors (KNN):** จัดกลุ่มข้อมูลโดยพิจารณาจากข้อมูลเพื่อนบ้านที่อยู่ใกล้เคียงที่สุด
+    """)
+    st.write("เมื่อได้รับข้อมูลผู้ป่วยใหม่ โมเดลทั้ง 3 ตัวจะทำการประเมินและโหวตคำตอบร่วมกัน ระบบจะเลือกคำตอบจาก 'เสียงข้างมาก' (Majority Vote) ทำให้ได้ผลลัพธ์การคัดกรองที่มีความเสถียรและแม่นยำสูงกว่าการใช้โมเดลเดียว")
+
     st.code("""
-# ตัวอย่างโค้ดการเตรียมข้อมูลด้วย Pandas และ Scikit-Learn
-import pandas as pd
-from sklearn.preprocessing import StandardScaler
-
-# 1. โหลดข้อมูลและแปลงข้อความเป็น 0,1
-df = pd.read_csv('heart_disease_uci.csv')
-df_encoded = pd.get_dummies(df)
-
-# 2. ปรับสเกลข้อมูล (Scaling)
-scaler = StandardScaler()
-X_scaled = scaler.fit_transform(X)
-    """, language='python')
-
-    st.header("Step 2: สร้างโมเดล Ensemble Learning")
-    st.write("เราใช้เทคนิค Voting Classifier โดยนำโมเดล 3 ตัวมาช่วยกันโหวตตัดสินใจ (Hard Voting) เพื่อให้ผลลัพธ์แม่นยำกว่าการใช้โมเดลเดียว")
-    st.code("""
-# ตัวอย่างโค้ดการสร้างโมเดล Ensemble
+# ตัวอย่างโค้ดการสร้างโมเดล Ensemble (Voting Classifier)
 from sklearn.linear_model import LogisticRegression
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.ensemble import VotingClassifier
 
-# สร้างโมเดลลูก 3 ตัว
+# กำหนดโมเดลย่อย
 model1 = LogisticRegression()
 model2 = DecisionTreeClassifier()
 model3 = KNeighborsClassifier()
 
-# มัดรวมเป็น Ensemble Model แล้วสั่งเทรน (fit)
+# รวมโมเดลและสั่งเทรนข้อมูล
 ensemble_model = VotingClassifier(
     estimators=[('lr', model1), ('dt', model2), ('knn', model3)], 
     voting='hard'
@@ -241,39 +238,48 @@ ensemble_model.fit(X_train_scaled, y_train)
 # --- หน้าทฤษฎี NN ---
 # ==========================================
 elif page == "หน้าหลัก - ทฤษฎี Neural Network":
-    st.markdown('<div class="main-header">ทฤษฎีการสร้าง Neural Network</div>', unsafe_allow_html=True)
-    st.write("Neural Network (โครงข่ายประสาทเทียม) เลียนแบบการทำงานของสมองมนุษย์ โดยรับข้อมูลเข้ามา ประมวลผลผ่านชั้นต่างๆ แล้วส่งผลลัพธ์ออกมาเป็นความน่าจะเป็น")
+    st.markdown('<div class="main-header">แนวทางการพัฒนาและทฤษฎี Neural Network</div>', unsafe_allow_html=True)
+    
+    st.markdown("### 1. แหล่งอ้างอิงข้อมูล (Data Source)")
+    st.write("ชุดข้อมูลที่นำมาใช้ฝึกสอนโครงข่ายประสาทเทียม คือ **Heart Disease Dataset** จาก **UCI Machine Learning Repository** เช่นเดียวกัน โดยนำข้อมูลที่ผ่านกระบวนการทำความสะอาด แปลงค่า และปรับสเกลข้อมูลมาตรฐานแล้ว (Standardized Data) มาใช้เป็นข้อมูลขาเข้า (Input)")
 
-    st.header("Step 1: ออกแบบโครงสร้าง (Architecture)")
-    st.write("เราใช้ไลบรารี TensorFlow/Keras ในการสร้างโมเดลแบบ Multi-Layer Perceptron (MLP) โดยมีโครงสร้าง 3 ชั้น:")
+    st.markdown("### 2. ทฤษฎีของอัลกอริทึมที่พัฒนา (Algorithm Theory)")
+    st.write("**Artificial Neural Network (ANN)** หรือโครงข่ายประสาทเทียม เป็นสถาปัตยกรรมทางคอมพิวเตอร์ที่จำลองการทำงานของเซลล์ประสาทมนุษย์ สำหรับโครงการนี้ได้ออกแบบโครงสร้างในรูปแบบ **Multi-Layer Perceptron (MLP)** ซึ่งประกอบด้วยชั้นการประมวลผลดังนี้:")
     st.markdown("""
-    1. **Hidden Layer 1:** มี 16 โหนด (ใช้ฟังก์ชันกระตุ้น ReLU เพื่อหาความสัมพันธ์ที่ซับซ้อน)
-    2. **Hidden Layer 2:** มี 8 โหนด (ใช้ ReLU กรองข้อมูลให้แคบลง)
-    3. **Output Layer:** มี 1 โหนด (ใช้ Sigmoid บีบผลลัพธ์ให้อยู่ระหว่าง 0 ถึง 1 หรือก็คือ 0-100%)
+    - **Input Layer:** รับค่าตัวแปรอิสระที่ผ่านการปรับสเกลแล้วเข้าสู่ระบบ
+    - **Hidden Layers:** ทำหน้าที่สกัดความสัมพันธ์ที่ซับซ้อนและไม่เป็นเส้นตรง (Non-linear) โดยใช้ฟังก์ชันกระตุ้น (Activation Function) แบบ **ReLU (Rectified Linear Unit)** จำนวน 2 ชั้นย่อย (ขนาด 16 และ 8 โหนด)
+    - **Output Layer:** ชั้นแสดงผลลัพธ์สุดท้าย ใช้ 1 โหนดร่วมกับฟังก์ชันกระตุ้นแบบ **Sigmoid** เพื่อบีบอัดค่าผลลัพธ์ให้อยู่ในรูปของ 'ความน่าจะเป็น' ที่มีค่าระหว่าง 0 ถึง 1 (สามารถตีความเปอร์เซ็นต์ความเสี่ยง 0-100% ได้)
     """)
+
+    st.markdown("### 3. ขั้นตอนการพัฒนาโมเดล (Model Development Steps)")
+    st.markdown("""
+    1. **ออกแบบโครงสร้าง (Model Architecture):** สร้างชั้น Dense Layers ตามโครงสร้าง MLP
+    2. **กำหนดวิธีการเรียนรู้ (Compile):** - **Optimizer:** ใช้อัลกอริทึม `Adam` เพื่อปรับน้ำหนัก (Weights) ของเครือข่ายให้ลู่เข้าหาจุดที่เหมาะสมที่สุดได้อย่างรวดเร็ว
+       - **Loss Function:** ใช้ `binary_crossentropy` ซึ่งออกแบบมาเฉพาะสำหรับการวัดค่าความผิดพลาดในงานจำแนกประเภทแบบ 2 คลาส (เป็น/ไม่เป็น โรคหัวใจ)
+    3. **ฝึกสอนโมเดล (Training):** นำชุดข้อมูล Training Set ป้อนเข้าสู่โมเดล (กำหนดจำนวนรอบ Epochs และ Batch Size) เพื่อให้โมเดลค่อยๆ เรียนรู้และปรับน้ำหนัก
+    4. **ประเมินผลและใช้งาน (Evaluation & Prediction):** ประเมินความแม่นยำด้วย Testing Set และนำโมเดลไปวิเคราะห์ความน่าจะเป็นเชิงลึกในหน้าการประเมิน
+    """)
+
     st.code("""
-# ตัวอย่างโค้ดการสร้างโครงสร้าง Neural Network
+# ตัวอย่างโค้ดการสร้างโครงสร้างและเทรน Neural Network
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense
 
+# 1. ออกแบบโครงสร้าง
 nn_model = Sequential([
     Dense(16, activation='relu', input_shape=(X_train.shape[1],)),
     Dense(8, activation='relu'),
     Dense(1, activation='sigmoid')
 ])
-    """, language='python')
 
-    st.header("Step 2: คอมไพล์และเทรนโมเดล (Compile & Train)")
-    st.write("หลังจากสร้างโครงสร้างเสร็จ ต้องกำหนดวิธีการเรียนรู้ (Optimizer) และวิธีการวัดความผิดพลาด (Loss Function) จากนั้นจึงทำการสอน (Train)")
-    st.code("""
-# กำหนดการตั้งค่าการเรียนรู้
+# 2. คอมไพล์โมเดล
 nn_model.compile(
     optimizer='adam', 
-    loss='binary_crossentropy', # เหมาะกับงานทายผล 2 ทาง
+    loss='binary_crossentropy', 
     metrics=['accuracy']
 )
 
-# สั่งเทรนโมเดล
+# 3. เทรนโมเดล
 nn_model.fit(
     X_train_scaled, y_train, 
     epochs=50, 
