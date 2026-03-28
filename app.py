@@ -136,12 +136,12 @@ def show_radar_chart(user_data):
         margin=dict(t=30, b=30, l=30, r=30)
     )
     
-    st.markdown('**กราฟเปรียบเทียบสุขภาพ (Health Radar)**')
+    st.markdown('**กราเปรียบเทียบสุขภาพ (Health Radar)**')
     st.write("เปรียบเทียบข้อมูลของคุณกับเกณฑ์มาตรฐาน (เส้นปะสีเขียว) หากพื้นที่สีแดงทะลุกรอบเส้นปะออกไปมาก ควรเฝ้าระวังเป็นพิเศษครับ")
     st.plotly_chart(fig, use_container_width=True)
 
 # 4. ตั้งค่าเมนูด้านข้าง (Sidebar)
-st.sidebar.markdown("### 🫀 ระบบประเมินสุขภาพ")
+st.sidebar.markdown("### ระบบประเมินสุขภาพ")
 # ผูก Radio button เข้ากับ Session State เพื่อให้กดปุ่มในหน้าหลักแล้วเมนูเปลี่ยนตาม
 page = st.sidebar.radio("โปรดเลือกเมนูที่ต้องการใช้งาน:", 
     ["หน้าแรก (Home)", 
@@ -158,7 +158,7 @@ st.sidebar.caption("พัฒนาโดย: นายธิติภูมิ 
 # --- หน้าแรก (Home) ---
 # ==========================================
 if page == "หน้าแรก (Home)":
-    st.markdown('<div class="main-header">ยินดีต้อนรับสู่ระบบประเมินความเสี่ยงโรคหัวใจ 🫀</div>', unsafe_allow_html=True)
+    st.markdown('<div class="main-header">ยินดีต้อนรับสู่ระบบประเมินความเสี่ยงโรคหัวใจ</div>', unsafe_allow_html=True)
     st.markdown("<p style='text-align: center; font-size: 18px; color: #555;'>แอปพลิเคชันนี้ประยุกต์ใช้เทคโนโลยีปัญญาประดิษฐ์ (AI) เพื่อวิเคราะห์ความเสี่ยงจากข้อมูลสุขภาพของคุณ <br>โปรดเลือกเมนูที่คุณต้องการใช้งานด้านล่างนี้</p>", unsafe_allow_html=True)
     st.write("")
     st.write("")
@@ -166,23 +166,23 @@ if page == "หน้าแรก (Home)":
     col1, col2 = st.columns(2)
     
     with col1:
-        st.markdown('<div class="section-header">📚 โหมดเรียนรู้ (Theory & Concept)</div>', unsafe_allow_html=True)
+        st.markdown('<div class="section-header">โหมดเรียนรู้ (Theory & Concept)</div>', unsafe_allow_html=True)
         st.info("ทำความเข้าใจเบื้องหลังการทำงานของ AI และขั้นตอนการเตรียมข้อมูลเพื่อสอนโมเดลสมองกล")
-        st.button("📖 ทฤษฎี Machine Learning (Ensemble)", 
+        st.button("ทฤษฎี Machine Learning (Ensemble)", 
                   on_click=navigate_to, args=("หน้าหลัก - ทฤษฎี Machine Learning",), 
                   use_container_width=True)
-        st.button("🧠 ทฤษฎี Neural Network (Deep Learning)", 
+        st.button("ทฤษฎี Neural Network (Deep Learning)", 
                   on_click=navigate_to, args=("หน้าหลัก - ทฤษฎี Neural Network",), 
                   use_container_width=True)
 
     with col2:
-        st.markdown('<div class="section-header">🩺 โหมดประเมินความเสี่ยง (Assessment)</div>', unsafe_allow_html=True)
+        st.markdown('<div class="section-header">โหมดประเมินความเสี่ยง (Assessment)</div>', unsafe_allow_html=True)
         st.success("ทดลองกรอกข้อมูลสุขภาพเพื่อประเมินความเสี่ยงโรคหัวใจด้วยตัวคุณเอง")
-        st.button("⚙️ ประเมินด้วย Machine Learning", 
+        st.button("ประเมินด้วย Machine Learning", 
                   type="primary", 
                   on_click=navigate_to, args=("ระบบประเมิน - Machine Learning",), 
                   use_container_width=True)
-        st.button("🚀 ประเมินด้วย Neural Network", 
+        st.button("ประเมินด้วย Neural Network", 
                   type="primary", 
                   on_click=navigate_to, args=("ระบบประเมิน - Neural Network",), 
                   use_container_width=True)
