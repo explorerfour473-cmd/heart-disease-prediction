@@ -112,28 +112,28 @@ def get_user_input():
 def show_personal_health_dashboard(user_data):
     st.markdown('<div class="section-header">แดชบอร์ดสรุปสุขภาพส่วนบุคคล (Personal Health Dashboard)</div>', unsafe_allow_html=True)
     st.write("แสดงค่าสุขภาพของคุณเปรียบเทียบกับช่วงเกณฑ์: สีเขียว (ปกติ), สีเหลือง (เฝ้าระวัง) และสีแดง (ความเสี่ยงสูง)")
-    st.write("") # เว้นบรรทัดลดความแออัด
+    st.write("") 
     
     col1, col2, col3 = st.columns(3)
     
-    # กำหนดความสูงและระยะขอบของกราฟให้สมดุล
-    chart_layout = dict(height=150, margin=dict(t=10, b=20, l=15, r=15))
+    # ลดความสูงลงเพราะไม่มีตัวเลขในกราฟแล้ว
+    chart_layout = dict(height=80, margin=dict(t=10, b=10, l=15, r=15))
     
     # 1. กราฟความดันโลหิต (Bullet Chart)
     with col1:
-        st.markdown("**🩺 ความดันโลหิต (Resting BP)**")
+        # ย้ายตัวเลขมาไว้ด้านบนด้วย HTML/Markdown เพื่อไม่ให้ทับกราฟ
+        st.markdown(f"**ความดันโลหิต (Resting BP)**<br><span style='font-size:24px; color:#0d47a1; font-weight:bold;'>{user_data['trestbps']}</span> mmHg", unsafe_allow_html=True)
         fig_bp = go.Figure(go.Indicator(
-            mode = "number+gauge",
+            mode = "gauge", # เอา number ออก
             value = user_data['trestbps'],
-            number = {'suffix': " mmHg", 'font': {'size': 24, 'color': '#2c3e50'}},
             gauge = {
                 'shape': "bullet",
                 'axis': {'range': [None, 250]},
                 'bar': {'color': "#2c3e50", 'thickness': 0.4}, 
                 'steps': [
-                    {'range': [0, 120], 'color': "#d4edda"},   # ปกติ (เขียวอ่อน)
-                    {'range': [120, 130], 'color': "#fff3cd"}, # เฝ้าระวัง (เหลืองอ่อน)
-                    {'range': [130, 250], 'color': "#f8d7da"}  # สูง (แดงอ่อน)
+                    {'range': [0, 120], 'color': "#d4edda"},   
+                    {'range': [120, 130], 'color': "#fff3cd"}, 
+                    {'range': [130, 250], 'color': "#f8d7da"}  
                 ],
                 'threshold': {'line': {'color': "black", 'width': 2}, 'thickness': 0.75, 'value': 120}
             }
@@ -143,19 +143,18 @@ def show_personal_health_dashboard(user_data):
 
     # 2. กราฟคอเลสเตอรอล (Bullet Chart)
     with col2:
-        st.markdown("**🩸 คอเลสเตอรอล (Cholesterol)**")
+        st.markdown(f"**คอเลสเตอรอล (Cholesterol)**<br><span style='font-size:24px; color:#0d47a1; font-weight:bold;'>{user_data['chol']}</span> mg/dl", unsafe_allow_html=True)
         fig_chol = go.Figure(go.Indicator(
-            mode = "number+gauge",
+            mode = "gauge", # เอา number ออก
             value = user_data['chol'],
-            number = {'suffix': " mg/dl", 'font': {'size': 24, 'color': '#2c3e50'}},
             gauge = {
                 'shape': "bullet",
                 'axis': {'range': [None, 400]},
                 'bar': {'color': "#2c3e50", 'thickness': 0.4},
                 'steps': [
-                    {'range': [0, 200], 'color': "#d4edda"},   # ปกติ
-                    {'range': [200, 240], 'color': "#fff3cd"}, # เริ่มสูง
-                    {'range': [240, 400], 'color': "#f8d7da"}  # สูง
+                    {'range': [0, 200], 'color': "#d4edda"},   
+                    {'range': [200, 240], 'color': "#fff3cd"}, 
+                    {'range': [240, 400], 'color': "#f8d7da"}  
                 ],
                 'threshold': {'line': {'color': "black", 'width': 2}, 'thickness': 0.75, 'value': 200}
             }
@@ -164,21 +163,20 @@ def show_personal_health_dashboard(user_data):
         st.plotly_chart(fig_chol, use_container_width=True)
 
     # 3. กราฟอัตราหัวใจสูงสุด (Bullet Chart)
-    max_hr = 220 - user_data['age'] # สูตรคำนวณ Max HR
+    max_hr = 220 - user_data['age'] 
     with col3:
-        st.markdown(f"**❤️ อัตราหัวใจสูงสุด (Max: {max_hr} bpm)**")
+        st.markdown(f"**อัตราหัวใจสูงสุด (Max: {max_hr})**<br><span style='font-size:24px; color:#0d47a1; font-weight:bold;'>{user_data['thalch']}</span> bpm", unsafe_allow_html=True)
         fig_hr = go.Figure(go.Indicator(
-            mode = "number+gauge",
+            mode = "gauge", # เอา number ออก
             value = user_data['thalch'],
-            number = {'suffix': " bpm", 'font': {'size': 24, 'color': '#2c3e50'}},
             gauge = {
                 'shape': "bullet",
                 'axis': {'range': [None, 220]},
                 'bar': {'color': "#2c3e50", 'thickness': 0.4},
                 'steps': [
-                    {'range': [0, max_hr * 0.5], 'color': "#e2e3e5"},         # ต่ำไป (เทา)
-                    {'range': [max_hr * 0.5, max_hr * 0.85], 'color': "#d4edda"}, # ช่วงที่เหมาะสม (เขียว)
-                    {'range': [max_hr * 0.85, 220], 'color': "#f8d7da"}       # สูงเกินไป (แดง)
+                    {'range': [0, max_hr * 0.5], 'color': "#e2e3e5"},         
+                    {'range': [max_hr * 0.5, max_hr * 0.85], 'color': "#d4edda"}, 
+                    {'range': [max_hr * 0.85, 220], 'color': "#f8d7da"}       
                 ],
                 'threshold': {'line': {'color': "red", 'width': 2}, 'thickness': 0.75, 'value': max_hr}
             }
@@ -188,7 +186,7 @@ def show_personal_health_dashboard(user_data):
 
     # --- กล่องข้อความสรุปคำแนะนำ ---
     st.markdown("---")
-    st.markdown("**📋 สรุปการวิเคราะห์ค่าสุขภาพเบื้องต้น:**")
+    st.markdown("**สรุปการวิเคราะห์ค่าสุขภาพเบื้องต้น:**")
     
     # วิเคราะห์ความดัน
     if user_data['trestbps'] > 130:
