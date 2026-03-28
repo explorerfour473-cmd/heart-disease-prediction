@@ -35,6 +35,11 @@ st.markdown("""
         color: #424242;
         margin-bottom: 10px;
     }
+    .alert-box {
+        padding: 15px;
+        border-radius: 5px;
+        margin-bottom: 10px;
+    }
 </style>
 """, unsafe_allow_html=True)
 
@@ -103,6 +108,97 @@ def get_user_input():
     
     return scaled_input, user_data
 
+# --- ฟังก์ชันเสริม: แดชบอร์ดสุขภาพส่วนบุคคล (Personal Health Dashboard) ---
+def show_personal_health_dashboard(user_data):
+    st.markdown('<div class="section-header">แดชบอร์ดสรุปสุขภาพส่วนบุคคล (Personal Health Dashboard)</div>', unsafe_allow_html=True)
+    
+    col1, col2, col3 = st.columns(3)
+    
+    # 1. เกจวัดความดันโลหิต
+    fig_bp = go.Figure(go.Indicator(
+        mode="gauge+number",
+        value=user_data['trestbps'],
+        title={'text': "ความดันโลหิต (mmHg)", 'font': {'size': 16}},
+        gauge={
+            'axis': {'range': [None, 250]},
+            'bar': {'color': "rgba(0,0,0,0)"}, # ซ่อนบาร์หลักเพื่อใช้สีจาก steps
+            'steps': [
+                {'range': [0, 120], 'color': "#a5d6a7"}, # ปกติ (เขียว)
+                {'range': [120, 130], 'color': "#fff59d"}, # เฝ้าระวัง (เหลือง)
+                {'range': [130, 250], 'color': "#ef9a9a"}  # สูง (แดง)
+            ],
+            'threshold': {
+                'line': {'color': "black", 'width': 3},
+                'thickness': 0.75,
+                'value': user_data['trestbps']
+            }
+        }
+    ))
+    fig_bp.update_layout(height=250, margin=dict(l=10, r=10, t=30, b=10))
+    col1.plotly_chart(fig_bp, use_container_width=True)
+
+    # 2. เกจวัดคอเลสเตอรอล
+    fig_chol = go.Figure(go.Indicator(
+        mode="gauge+number",
+        value=user_data['chol'],
+        title={'text': "คอเลสเตอรอล (mg/dl)", 'font': {'size': 16}},
+        gauge={
+            'axis': {'range': [None, 400]},
+            'bar': {'color': "rgba(0,0,0,0)"},
+            'steps': [
+                {'range': [0, 200], 'color': "#a5d6a7"}, # ปกติ (เขียว)
+                {'range': [200, 240], 'color': "#fff59d"}, # เริ่มสูง (เหลือง)
+                {'range': [240, 400], 'color': "#ef9a9a"}  # สูง (แดง)
+            ],
+            'threshold': {
+                'line': {'color': "black", 'width': 3},
+                'thickness': 0.75,
+                'value': user_data['chol']
+            }
+        }
+    ))
+    fig_chol.update_layout(height=250, margin=dict(l=10, r=10, t=30, b=10))
+    col2.plotly_chart(fig_chol, use_container_width=True)
+
+    # 3. เกจวัดอัตราหัวใจสูงสุด (อ้างอิงจากอายุ)
+    max_hr = 220 - user_data['age'] # สูตรคำนวณ Max HR
+    fig_hr = go.Figure(go.Indicator(
+        mode="gauge+number+delta",
+        value=user_data['thalch'],
+        title={'text': f"อัตราหัวใจสูงสุด (Max: {max_hr})", 'font': {'size': 16}},
+        delta={'reference': max_hr, 'increasing': {'color': "red"}, 'decreasing': {'color': "green"}},
+        gauge={
+            'axis': {'range': [None, 220]},
+            'bar': {'color': "#64b5f6"},
+            'threshold': {
+                'line': {'color': "red", 'width': 2},
+                'thickness': 0.75,
+                'value': max_hr
+            }
+        }
+    ))
+    fig_hr.update_layout(height=250, margin=dict(l=10, r=10, t=30, b=10))
+    col3.plotly_chart(fig_hr, use_container_width=True)
+
+    # --- กล่องข้อความสรุปคำแนะนำ ---
+    st.markdown("**การวิเคราะห์ค่าสุขภาพเบื้องต้น:**")
+    
+    # วิเคราะห์ความดัน
+    if user_data['trestbps'] > 130:
+        st.warning(f"ความดันโลหิตของคุณ ({user_data['trestbps']} mmHg) อยู่ในเกณฑ์ **สูง** ควรลดการบริโภคโซเดียมและปรึกษาแพทย์")
+    elif user_data['trestbps'] > 120:
+        st.info(f"ความดันโลหิตของคุณ ({user_data['trestbps']} mmHg) อยู่ในเกณฑ์ **ค่อนข้างสูง** ควรเฝ้าระวังพฤติกรรมการทานอาหาร")
+    else:
+        st.success(f"ความดันโลหิตของคุณ ({user_data['trestbps']} mmHg) อยู่ในเกณฑ์ **ปกติ**")
+
+    # วิเคราะห์คอเลสเตอรอล
+    if user_data['chol'] > 240:
+        st.warning(f"คอเลสเตอรอลของคุณ ({user_data['chol']} mg/dl) อยู่ในเกณฑ์ **สูง** เสี่ยงต่อการเกิดหลอดเลือดอุดตัน ควรหลีกเลี่ยงของมันของทอด")
+    elif user_data['chol'] > 200:
+        st.info(f"คอเลสเตอรอลของคุณ ({user_data['chol']} mg/dl) อยู่ในเกณฑ์ **เริ่มสูง** ควรควบคุมอาหาร")
+    else:
+        st.success(f"คอเลสเตอรอลของคุณ ({user_data['chol']} mg/dl) อยู่ในเกณฑ์ **ปกติ**")
+
 # --- ฟังก์ชันเสริม: วาดกราฟ Radar Chart ---
 def show_radar_chart(user_data):
     categories = ['ความดันโลหิต', 'คอเลสเตอรอล', 'อัตราหัวใจสูงสุด', 'ความดันโลหิต']
@@ -136,7 +232,7 @@ def show_radar_chart(user_data):
         margin=dict(t=30, b=30, l=30, r=30)
     )
     
-    st.markdown('**กราฟเปรียบเทียบสุขภาพ (Health Radar)**')
+    st.markdown('**กราฟเปรียบเทียบสุขภาพรวม (Health Radar)**')
     st.write("เปรียบเทียบข้อมูลของคุณกับเกณฑ์มาตรฐาน (เส้นปะสีเขียว) หากพื้นที่สีแดงทะลุกรอบเส้นปะออกไปมาก ควรเฝ้าระวังเป็นพิเศษครับ")
     st.plotly_chart(fig, use_container_width=True)
 
@@ -303,6 +399,9 @@ elif page == "ระบบประเมิน - Machine Learning":
         else:
             st.success("ผลการประเมิน: ปกติ (ไม่พบความเสี่ยงในระดับที่น่ากังวล)")
         
+        # แสดง Dashboard ส่วนบุคคลก่อน แล้วตามด้วย Radar Chart
+        show_personal_health_dashboard(user_data)
+        st.markdown("---")
         show_radar_chart(user_data)
         
         st.info("ข้อสังเกต: โมเดล Machine Learning แบบ Hard Voting จะจำแนกผลลัพธ์เป็นกลุ่มเด็ดขาด (เป็น/ไม่เป็น) โดยไม่มีการแสดงค่าความน่าจะเป็น")
@@ -351,4 +450,7 @@ elif page == "ระบบประเมิน - Neural Network":
         st.plotly_chart(fig, use_container_width=True)
         st.markdown("---")
         
+        # แสดง Dashboard ส่วนบุคคลก่อน แล้วตามด้วย Radar Chart
+        show_personal_health_dashboard(user_data)
+        st.markdown("---")
         show_radar_chart(user_data)
