@@ -1,0 +1,921 @@
+id,age,sex,dataset,cp
+1,63,Male,Cleveland,typical angina
+2,67,Male,Cleveland,asymptomatic
+3,67,Male,Cleveland,asymptomatic
+4,37,Male,Cleveland,non-anginal
+5,41,Female,Cleveland,atypical angina
+6,56,Male,Cleveland,atypical angina
+7,62,Female,Cleveland,asymptomatic
+8,57,Female,Cleveland,asymptomatic
+9,63,Male,Cleveland,asymptomatic
+10,53,Male,Cleveland,asymptomatic
+11,57,Male,Cleveland,asymptomatic
+12,56,Female,Cleveland,atypical angina
+13,56,Male,Cleveland,non-anginal
+14,44,Male,Cleveland,atypical angina
+15,52,Male,Cleveland,non-anginal
+16,57,Male,Cleveland,non-anginal
+17,48,Male,Cleveland,atypical angina
+18,54,Male,Cleveland,asymptomatic
+19,48,Female,Cleveland,non-anginal
+20,49,Male,Cleveland,atypical angina
+21,64,Male,Cleveland,typical angina
+22,58,Female,Cleveland,typical angina
+23,58,Male,Cleveland,atypical angina
+24,58,Male,Cleveland,non-anginal
+25,60,Male,Cleveland,asymptomatic
+26,50,Female,Cleveland,non-anginal
+27,58,Female,Cleveland,non-anginal
+28,66,Female,Cleveland,typical angina
+29,43,Male,Cleveland,asymptomatic
+30,40,Male,Cleveland,asymptomatic
+31,69,Female,Cleveland,typical angina
+32,60,Male,Cleveland,asymptomatic
+33,64,Male,Cleveland,non-anginal
+34,59,Male,Cleveland,asymptomatic
+35,44,Male,Cleveland,non-anginal
+36,42,Male,Cleveland,asymptomatic
+37,43,Male,Cleveland,asymptomatic
+38,57,Male,Cleveland,asymptomatic
+39,55,Male,Cleveland,asymptomatic
+40,61,Male,Cleveland,non-anginal
+41,65,Female,Cleveland,asymptomatic
+42,40,Male,Cleveland,typical angina
+43,71,Female,Cleveland,atypical angina
+44,59,Male,Cleveland,non-anginal
+45,61,Female,Cleveland,asymptomatic
+46,58,Male,Cleveland,non-anginal
+47,51,Male,Cleveland,non-anginal
+48,50,Male,Cleveland,asymptomatic
+49,65,Female,Cleveland,non-anginal
+50,53,Male,Cleveland,non-anginal
+51,41,Female,Cleveland,atypical angina
+52,65,Male,Cleveland,asymptomatic
+53,44,Male,Cleveland,asymptomatic
+54,44,Male,Cleveland,atypical angina
+55,60,Male,Cleveland,asymptomatic
+56,54,Male,Cleveland,asymptomatic
+57,50,Male,Cleveland,non-anginal
+58,41,Male,Cleveland,asymptomatic
+59,54,Male,Cleveland,non-anginal
+60,51,Male,Cleveland,typical angina
+61,51,Female,Cleveland,asymptomatic
+62,46,Female,Cleveland,non-anginal
+63,58,Male,Cleveland,asymptomatic
+64,54,Female,Cleveland,non-anginal
+65,54,Male,Cleveland,asymptomatic
+66,60,Male,Cleveland,asymptomatic
+67,60,Male,Cleveland,non-anginal
+68,54,Male,Cleveland,non-anginal
+69,59,Male,Cleveland,asymptomatic
+70,46,Male,Cleveland,non-anginal
+71,65,Female,Cleveland,non-anginal
+72,67,Male,Cleveland,asymptomatic
+73,62,Male,Cleveland,asymptomatic
+74,65,Male,Cleveland,asymptomatic
+75,44,Male,Cleveland,asymptomatic
+76,65,Female,Cleveland,non-anginal
+77,60,Male,Cleveland,asymptomatic
+78,51,Female,Cleveland,non-anginal
+79,48,Male,Cleveland,atypical angina
+80,58,Male,Cleveland,asymptomatic
+81,45,Male,Cleveland,asymptomatic
+82,53,Female,Cleveland,asymptomatic
+83,39,Male,Cleveland,non-anginal
+84,68,Male,Cleveland,non-anginal
+85,52,Male,Cleveland,atypical angina
+86,44,Male,Cleveland,non-anginal
+87,47,Male,Cleveland,non-anginal
+88,53,Female,Cleveland,non-anginal
+89,53,Female,Cleveland,asymptomatic
+90,51,Female,Cleveland,non-anginal
+91,66,Male,Cleveland,asymptomatic
+92,62,Female,Cleveland,asymptomatic
+93,62,Male,Cleveland,non-anginal
+94,44,Female,Cleveland,non-anginal
+95,63,Female,Cleveland,non-anginal
+96,52,Male,Cleveland,asymptomatic
+97,59,Male,Cleveland,asymptomatic
+98,60,Female,Cleveland,asymptomatic
+99,52,Male,Cleveland,atypical angina
+100,48,Male,Cleveland,asymptomatic
+101,45,Male,Cleveland,asymptomatic
+102,34,Male,Cleveland,typical angina
+103,57,Female,Cleveland,asymptomatic
+104,71,Female,Cleveland,non-anginal
+105,49,Male,Cleveland,non-anginal
+106,54,Male,Cleveland,atypical angina
+107,59,Male,Cleveland,asymptomatic
+108,57,Male,Cleveland,non-anginal
+109,61,Male,Cleveland,asymptomatic
+110,39,Male,Cleveland,asymptomatic
+111,61,Female,Cleveland,asymptomatic
+112,56,Male,Cleveland,asymptomatic
+113,52,Male,Cleveland,typical angina
+114,43,Female,Cleveland,asymptomatic
+115,62,Female,Cleveland,non-anginal
+116,41,Male,Cleveland,atypical angina
+117,58,Male,Cleveland,non-anginal
+118,35,Female,Cleveland,asymptomatic
+119,63,Male,Cleveland,asymptomatic
+120,65,Male,Cleveland,asymptomatic
+121,48,Male,Cleveland,asymptomatic
+122,63,Female,Cleveland,asymptomatic
+123,51,Male,Cleveland,non-anginal
+124,55,Male,Cleveland,asymptomatic
+125,65,Male,Cleveland,typical angina
+126,45,Female,Cleveland,atypical angina
+127,56,Female,Cleveland,asymptomatic
+128,54,Male,Cleveland,asymptomatic
+129,44,Male,Cleveland,atypical angina
+130,62,Female,Cleveland,asymptomatic
+131,54,Male,Cleveland,non-anginal
+132,51,Male,Cleveland,non-anginal
+133,29,Male,Cleveland,atypical angina
+134,51,Male,Cleveland,asymptomatic
+135,43,Female,Cleveland,non-anginal
+136,55,Female,Cleveland,atypical angina
+137,70,Male,Cleveland,asymptomatic
+138,62,Male,Cleveland,atypical angina
+139,35,Male,Cleveland,asymptomatic
+140,51,Male,Cleveland,non-anginal
+141,59,Male,Cleveland,atypical angina
+142,59,Male,Cleveland,typical angina
+143,52,Male,Cleveland,atypical angina
+144,64,Male,Cleveland,non-anginal
+145,58,Male,Cleveland,non-anginal
+146,47,Male,Cleveland,non-anginal
+147,57,Male,Cleveland,asymptomatic
+148,41,Male,Cleveland,non-anginal
+149,45,Male,Cleveland,atypical angina
+150,60,Female,Cleveland,non-anginal
+151,52,Male,Cleveland,typical angina
+152,42,Female,Cleveland,asymptomatic
+153,67,Female,Cleveland,non-anginal
+154,55,Male,Cleveland,asymptomatic
+155,64,Male,Cleveland,asymptomatic
+156,70,Male,Cleveland,asymptomatic
+157,51,Male,Cleveland,asymptomatic
+158,58,Male,Cleveland,asymptomatic
+159,60,Male,Cleveland,asymptomatic
+160,68,Male,Cleveland,non-anginal
+161,46,Male,Cleveland,atypical angina
+162,77,Male,Cleveland,asymptomatic
+163,54,Female,Cleveland,non-anginal
+164,58,Female,Cleveland,asymptomatic
+165,48,Male,Cleveland,non-anginal
+166,57,Male,Cleveland,asymptomatic
+167,52,Male,Cleveland,non-anginal
+168,54,Female,Cleveland,atypical angina
+169,35,Male,Cleveland,asymptomatic
+170,45,Female,Cleveland,atypical angina
+171,70,Male,Cleveland,non-anginal
+172,53,Male,Cleveland,asymptomatic
+173,59,Female,Cleveland,asymptomatic
+174,62,Female,Cleveland,asymptomatic
+175,64,Male,Cleveland,asymptomatic
+176,57,Male,Cleveland,asymptomatic
+177,52,Male,Cleveland,asymptomatic
+178,56,Male,Cleveland,asymptomatic
+179,43,Male,Cleveland,non-anginal
+180,53,Male,Cleveland,non-anginal
+181,48,Male,Cleveland,asymptomatic
+182,56,Female,Cleveland,asymptomatic
+183,42,Male,Cleveland,typical angina
+184,59,Male,Cleveland,typical angina
+185,60,Female,Cleveland,asymptomatic
+186,63,Female,Cleveland,atypical angina
+187,42,Male,Cleveland,non-anginal
+188,66,Male,Cleveland,atypical angina
+189,54,Male,Cleveland,atypical angina
+190,69,Male,Cleveland,non-anginal
+191,50,Male,Cleveland,non-anginal
+192,51,Male,Cleveland,asymptomatic
+193,43,Male,Cleveland,asymptomatic
+194,62,Female,Cleveland,asymptomatic
+195,68,Female,Cleveland,non-anginal
+196,67,Male,Cleveland,asymptomatic
+197,69,Male,Cleveland,typical angina
+198,45,Female,Cleveland,asymptomatic
+199,50,Female,Cleveland,atypical angina
+200,59,Male,Cleveland,typical angina
+201,50,Female,Cleveland,asymptomatic
+202,64,Female,Cleveland,asymptomatic
+203,57,Male,Cleveland,non-anginal
+204,64,Female,Cleveland,non-anginal
+205,43,Male,Cleveland,asymptomatic
+206,45,Male,Cleveland,asymptomatic
+207,58,Male,Cleveland,asymptomatic
+208,50,Male,Cleveland,asymptomatic
+209,55,Male,Cleveland,atypical angina
+210,62,Female,Cleveland,asymptomatic
+211,37,Female,Cleveland,non-anginal
+212,38,Male,Cleveland,typical angina
+213,41,Male,Cleveland,non-anginal
+214,66,Female,Cleveland,asymptomatic
+215,52,Male,Cleveland,asymptomatic
+216,56,Male,Cleveland,typical angina
+217,46,Female,Cleveland,atypical angina
+218,46,Female,Cleveland,asymptomatic
+219,64,Female,Cleveland,asymptomatic
+220,59,Male,Cleveland,asymptomatic
+221,41,Female,Cleveland,non-anginal
+222,54,Female,Cleveland,non-anginal
+223,39,Female,Cleveland,non-anginal
+224,53,Male,Cleveland,asymptomatic
+225,63,Female,Cleveland,asymptomatic
+226,34,Female,Cleveland,atypical angina
+227,47,Male,Cleveland,asymptomatic
+228,67,Female,Cleveland,non-anginal
+229,54,Male,Cleveland,asymptomatic
+230,66,Male,Cleveland,asymptomatic
+231,52,Female,Cleveland,non-anginal
+232,55,Female,Cleveland,asymptomatic
+233,49,Male,Cleveland,non-anginal
+234,74,Female,Cleveland,atypical angina
+235,54,Female,Cleveland,non-anginal
+236,54,Male,Cleveland,asymptomatic
+237,56,Male,Cleveland,asymptomatic
+238,46,Male,Cleveland,asymptomatic
+239,49,Female,Cleveland,atypical angina
+240,42,Male,Cleveland,atypical angina
+241,41,Male,Cleveland,atypical angina
+242,41,Female,Cleveland,atypical angina
+243,49,Female,Cleveland,asymptomatic
+244,61,Male,Cleveland,typical angina
+245,60,Female,Cleveland,non-anginal
+246,67,Male,Cleveland,asymptomatic
+247,58,Male,Cleveland,asymptomatic
+248,47,Male,Cleveland,asymptomatic
+249,52,Male,Cleveland,asymptomatic
+250,62,Male,Cleveland,atypical angina
+251,57,Male,Cleveland,asymptomatic
+252,58,Male,Cleveland,asymptomatic
+253,64,Male,Cleveland,asymptomatic
+254,51,Female,Cleveland,non-anginal
+255,43,Male,Cleveland,asymptomatic
+256,42,Female,Cleveland,non-anginal
+257,67,Female,Cleveland,asymptomatic
+258,76,Female,Cleveland,non-anginal
+259,70,Male,Cleveland,atypical angina
+260,57,Male,Cleveland,atypical angina
+261,44,Female,Cleveland,non-anginal
+262,58,Female,Cleveland,atypical angina
+263,60,Female,Cleveland,typical angina
+264,44,Male,Cleveland,non-anginal
+265,61,Male,Cleveland,asymptomatic
+266,42,Male,Cleveland,asymptomatic
+267,52,Male,Cleveland,asymptomatic
+268,59,Male,Cleveland,non-anginal
+269,40,Male,Cleveland,asymptomatic
+270,42,Male,Cleveland,non-anginal
+271,61,Male,Cleveland,asymptomatic
+272,66,Male,Cleveland,asymptomatic
+273,46,Male,Cleveland,asymptomatic
+274,71,Female,Cleveland,asymptomatic
+275,59,Male,Cleveland,typical angina
+276,64,Male,Cleveland,typical angina
+277,66,Female,Cleveland,non-anginal
+278,39,Female,Cleveland,non-anginal
+279,57,Male,Cleveland,atypical angina
+280,58,Female,Cleveland,asymptomatic
+281,57,Male,Cleveland,asymptomatic
+282,47,Male,Cleveland,non-anginal
+283,55,Female,Cleveland,asymptomatic
+284,35,Male,Cleveland,atypical angina
+285,61,Male,Cleveland,asymptomatic
+286,58,Male,Cleveland,asymptomatic
+287,58,Female,Cleveland,asymptomatic
+288,58,Male,Cleveland,atypical angina
+289,56,Male,Cleveland,atypical angina
+290,56,Male,Cleveland,atypical angina
+291,67,Male,Cleveland,non-anginal
+292,55,Female,Cleveland,atypical angina
+293,44,Male,Cleveland,asymptomatic
+294,63,Male,Cleveland,asymptomatic
+295,63,Female,Cleveland,asymptomatic
+296,41,Male,Cleveland,atypical angina
+297,59,Male,Cleveland,asymptomatic
+298,57,Female,Cleveland,asymptomatic
+299,45,Male,Cleveland,typical angina
+300,68,Male,Cleveland,asymptomatic
+301,57,Male,Cleveland,asymptomatic
+302,57,Female,Cleveland,atypical angina
+303,38,Male,Cleveland,non-anginal
+304,28,Male,Cleveland,atypical angina
+305,29,Male,Hungary,atypical angina
+306,29,Male,Hungary,atypical angina
+307,30,Female,Hungary,typical angina
+308,31,Female,Hungary,atypical angina
+309,32,Female,Hungary,atypical angina
+310,32,Male,Hungary,atypical angina
+311,32,Male,Hungary,atypical angina
+312,33,Male,Hungary,non-anginal
+313,34,Female,Hungary,atypical angina
+314,34,Male,Hungary,atypical angina
+315,34,Male,Hungary,atypical angina
+316,35,Female,Hungary,typical angina
+317,35,Female,Hungary,asymptomatic
+318,35,Male,Hungary,atypical angina
+319,35,Male,Hungary,atypical angina
+320,36,Male,Hungary,atypical angina
+321,36,Male,Hungary,non-anginal
+322,36,Male,Hungary,non-anginal
+323,36,Male,Hungary,non-anginal
+324,37,Female,Hungary,atypical angina
+325,37,Female,Hungary,non-anginal
+326,37,Female,Hungary,asymptomatic
+327,37,Male,Hungary,atypical angina
+328,37,Male,Hungary,non-anginal
+329,37,Male,Hungary,asymptomatic
+330,37,Male,Hungary,asymptomatic
+331,38,Female,Hungary,atypical angina
+332,38,Male,Hungary,atypical angina
+333,38,Male,Hungary,non-anginal
+334,39,Female,Hungary,non-anginal
+335,39,Male,Hungary,atypical angina
+336,39,Male,Hungary,atypical angina
+337,39,Male,Hungary,atypical angina
+338,39,Male,Hungary,atypical angina
+339,39,Male,Hungary,atypical angina
+340,39,Male,Hungary,non-anginal
+341,39,Male,Hungary,non-anginal
+342,39,Male,Hungary,asymptomatic
+343,39,Male,Hungary,asymptomatic
+344,40,Male,Hungary,atypical angina
+345,40,Male,Hungary,atypical angina
+346,40,Male,Hungary,non-anginal
+347,40,Male,Hungary,non-anginal
+348,40,Male,Hungary,non-anginal
+349,41,Female,Hungary,atypical angina
+350,41,Female,Hungary,atypical angina
+351,41,Female,Hungary,atypical angina
+352,41,Male,Hungary,atypical angina
+353,41,Male,Hungary,atypical angina
+354,41,Male,Hungary,atypical angina
+355,41,Male,Hungary,asymptomatic
+356,42,Female,Hungary,non-anginal
+357,42,Male,Hungary,atypical angina
+358,42,Male,Hungary,atypical angina
+359,42,Male,Hungary,atypical angina
+360,42,Male,Hungary,non-anginal
+361,42,Male,Hungary,non-anginal
+362,42,Male,Hungary,asymptomatic
+363,43,Female,Hungary,typical angina
+364,43,Female,Hungary,atypical angina
+365,43,Female,Hungary,atypical angina
+366,43,Female,Hungary,atypical angina
+367,43,Female,Hungary,atypical angina
+368,43,Female,Hungary,atypical angina
+369,43,Female,Hungary,non-anginal
+370,43,Male,Hungary,atypical angina
+371,44,Female,Hungary,asymptomatic
+372,44,Male,Hungary,atypical angina
+373,44,Male,Hungary,atypical angina
+374,44,Male,Hungary,asymptomatic
+375,45,Female,Hungary,atypical angina
+376,45,Female,Hungary,atypical angina
+377,45,Female,Hungary,asymptomatic
+378,45,Male,Hungary,atypical angina
+379,45,Male,Hungary,non-anginal
+380,45,Male,Hungary,asymptomatic
+381,45,Male,Hungary,asymptomatic
+382,46,Female,Hungary,asymptomatic
+383,46,Male,Hungary,atypical angina
+384,46,Male,Hungary,non-anginal
+385,46,Male,Hungary,non-anginal
+386,46,Male,Hungary,asymptomatic
+387,46,Male,Hungary,asymptomatic
+388,46,Male,Hungary,asymptomatic
+389,47,Female,Hungary,atypical angina
+390,47,Female,Hungary,non-anginal
+391,47,Male,Hungary,typical angina
+392,47,Male,Hungary,atypical angina
+393,47,Male,Hungary,asymptomatic
+394,48,Female,Hungary,atypical angina
+395,48,Female,Hungary,atypical angina
+396,48,Female,Hungary,atypical angina
+397,48,Female,Hungary,non-anginal
+398,48,Female,Hungary,asymptomatic
+399,48,Female,Hungary,asymptomatic
+400,48,Female,Hungary,asymptomatic
+401,48,Male,Hungary,atypical angina
+402,48,Male,Hungary,atypical angina
+403,48,Male,Hungary,atypical angina
+404,48,Male,Hungary,non-anginal
+405,49,Female,Hungary,atypical angina
+406,49,Female,Hungary,atypical angina
+407,49,Female,Hungary,atypical angina
+408,49,Female,Hungary,non-anginal
+409,49,Male,Hungary,atypical angina
+410,49,Male,Hungary,non-anginal
+411,49,Male,Hungary,asymptomatic
+412,49,Male,Hungary,asymptomatic
+413,50,Female,Hungary,atypical angina
+414,50,Female,Hungary,asymptomatic
+415,50,Male,Hungary,atypical angina
+416,50,Male,Hungary,atypical angina
+417,50,Male,Hungary,atypical angina
+418,50,Male,Hungary,asymptomatic
+419,50,Male,Hungary,asymptomatic
+420,51,Female,Hungary,atypical angina
+421,51,Female,Hungary,non-anginal
+422,51,Female,Hungary,non-anginal
+423,51,Female,Hungary,non-anginal
+424,51,Male,Hungary,atypical angina
+425,51,Male,Hungary,atypical angina
+426,51,Male,Hungary,asymptomatic
+427,52,Female,Hungary,atypical angina
+428,52,Female,Hungary,atypical angina
+429,52,Female,Hungary,non-anginal
+430,52,Female,Hungary,asymptomatic
+431,52,Male,Hungary,atypical angina
+432,52,Male,Hungary,atypical angina
+433,52,Male,Hungary,atypical angina
+434,52,Male,Hungary,non-anginal
+435,53,Female,Hungary,atypical angina
+436,53,Female,Hungary,atypical angina
+437,53,Female,Hungary,non-anginal
+438,53,Male,Hungary,atypical angina
+439,53,Male,Hungary,atypical angina
+440,53,Male,Hungary,non-anginal
+441,53,Male,Hungary,asymptomatic
+442,53,Male,Hungary,asymptomatic
+443,53,Male,Hungary,asymptomatic
+444,54,Female,Hungary,atypical angina
+445,54,Female,Hungary,atypical angina
+446,54,Female,Hungary,atypical angina
+447,54,Female,Hungary,atypical angina
+448,54,Female,Hungary,atypical angina
+449,54,Female,Hungary,atypical angina
+450,54,Female,Hungary,atypical angina
+451,54,Male,Hungary,typical angina
+452,54,Male,Hungary,atypical angina
+453,54,Male,Hungary,atypical angina
+454,54,Male,Hungary,atypical angina
+455,54,Male,Hungary,atypical angina
+456,54,Male,Hungary,atypical angina
+457,54,Male,Hungary,non-anginal
+458,54,Male,Hungary,non-anginal
+459,54,Male,Hungary,asymptomatic
+460,55,Female,Hungary,atypical angina
+461,55,Female,Hungary,atypical angina
+462,55,Female,Hungary,atypical angina
+463,55,Male,Hungary,atypical angina
+464,55,Male,Hungary,atypical angina
+465,55,Male,Hungary,atypical angina
+466,55,Male,Hungary,non-anginal
+467,55,Male,Hungary,non-anginal
+468,55,Male,Hungary,asymptomatic
+469,55,Male,Hungary,asymptomatic
+470,56,Female,Hungary,non-anginal
+471,56,Male,Hungary,atypical angina
+472,56,Male,Hungary,non-anginal
+473,56,Male,Hungary,non-anginal
+474,56,Male,Hungary,asymptomatic
+475,57,Female,Hungary,typical angina
+476,57,Female,Hungary,asymptomatic
+477,57,Male,Hungary,atypical angina
+478,58,Male,Hungary,atypical angina
+479,58,Male,Hungary,atypical angina
+480,58,Male,Hungary,non-anginal
+481,58,Male,Hungary,asymptomatic
+482,59,Female,Hungary,atypical angina
+483,59,Male,Hungary,atypical angina
+484,59,Male,Hungary,non-anginal
+485,59,Male,Hungary,non-anginal
+486,59,Male,Hungary,asymptomatic
+487,60,Male,Hungary,non-anginal
+488,61,Female,Hungary,asymptomatic
+489,61,Male,Hungary,asymptomatic
+490,62,Female,Hungary,typical angina
+491,62,Male,Hungary,atypical angina
+492,31,Male,Hungary,asymptomatic
+493,33,Female,Hungary,asymptomatic
+494,34,Male,Hungary,typical angina
+495,35,Male,Hungary,atypical angina
+496,36,Male,Hungary,atypical angina
+497,37,Male,Hungary,asymptomatic
+498,38,Male,Hungary,asymptomatic
+499,38,Male,Hungary,asymptomatic
+500,38,Male,Hungary,asymptomatic
+501,40,Male,Hungary,asymptomatic
+502,41,Male,Hungary,asymptomatic
+503,41,Male,Hungary,asymptomatic
+504,43,Male,Hungary,asymptomatic
+505,46,Male,Hungary,asymptomatic
+506,46,Male,Hungary,asymptomatic
+507,46,Male,Hungary,asymptomatic
+508,47,Male,Hungary,non-anginal
+509,47,Male,Hungary,asymptomatic
+510,48,Male,Hungary,asymptomatic
+511,48,Male,Hungary,asymptomatic
+512,48,Male,Hungary,asymptomatic
+513,49,Female,Hungary,non-anginal
+514,49,Male,Hungary,non-anginal
+515,49,Male,Hungary,asymptomatic
+516,50,Female,Hungary,non-anginal
+517,50,Male,Hungary,asymptomatic
+518,51,Female,Hungary,asymptomatic
+519,52,Male,Hungary,asymptomatic
+520,54,Male,Hungary,asymptomatic
+521,54,Male,Hungary,asymptomatic
+522,55,Male,Hungary,asymptomatic
+523,57,Male,Hungary,atypical angina
+524,58,Male,Hungary,non-anginal
+525,59,Female,Hungary,asymptomatic
+526,60,Male,Hungary,asymptomatic
+527,63,Male,Hungary,asymptomatic
+528,65,Male,Hungary,asymptomatic
+529,32,Male,Hungary,asymptomatic
+530,38,Male,Hungary,asymptomatic
+531,39,Male,Hungary,asymptomatic
+532,40,Female,Hungary,asymptomatic
+533,43,Male,Hungary,typical angina
+534,45,Male,Hungary,asymptomatic
+535,46,Male,Hungary,asymptomatic
+536,46,Male,Hungary,asymptomatic
+537,48,Male,Hungary,asymptomatic
+538,48,Male,Hungary,asymptomatic
+539,48,Male,Hungary,asymptomatic
+540,48,Male,Hungary,asymptomatic
+541,50,Male,Hungary,asymptomatic
+542,52,Male,Hungary,asymptomatic
+543,52,Male,Hungary,asymptomatic
+544,53,Male,Hungary,asymptomatic
+545,54,Male,Hungary,non-anginal
+546,54,Male,Hungary,asymptomatic
+547,54,Male,Hungary,asymptomatic
+548,54,Male,Hungary,asymptomatic
+549,54,Male,Hungary,asymptomatic
+550,55,Male,Hungary,asymptomatic
+551,56,Male,Hungary,asymptomatic
+552,57,Male,Hungary,asymptomatic
+553,58,Male,Hungary,non-anginal
+554,58,Male,Hungary,asymptomatic
+555,41,Male,Hungary,asymptomatic
+556,43,Male,Hungary,asymptomatic
+557,44,Male,Hungary,atypical angina
+558,44,Male,Hungary,asymptomatic
+559,46,Male,Hungary,typical angina
+560,47,Female,Hungary,non-anginal
+561,48,Female,Hungary,asymptomatic
+562,49,Male,Hungary,asymptomatic
+563,49,Male,Hungary,asymptomatic
+564,51,Male,Hungary,non-anginal
+565,52,Male,Hungary,asymptomatic
+566,52,Male,Hungary,asymptomatic
+567,52,Male,Hungary,asymptomatic
+568,52,Male,Hungary,asymptomatic
+569,53,Male,Hungary,non-anginal
+570,53,Male,Hungary,asymptomatic
+571,54,Male,Hungary,asymptomatic
+572,55,Male,Hungary,typical angina
+573,55,Male,Hungary,atypical angina
+574,55,Male,Hungary,asymptomatic
+575,56,Female,Hungary,atypical angina
+576,56,Male,Hungary,asymptomatic
+577,56,Male,Hungary,asymptomatic
+578,58,Male,Hungary,atypical angina
+579,59,Male,Hungary,asymptomatic
+580,59,Male,Hungary,asymptomatic
+581,65,Male,Hungary,asymptomatic
+582,66,Male,Hungary,asymptomatic
+583,41,Male,Hungary,asymptomatic
+584,43,Male,Hungary,asymptomatic
+585,44,Male,Hungary,asymptomatic
+586,47,Female,Hungary,asymptomatic
+587,47,Male,Hungary,asymptomatic
+588,49,Male,Hungary,asymptomatic
+589,49,Male,Hungary,asymptomatic
+590,50,Male,Hungary,asymptomatic
+591,50,Male,Hungary,asymptomatic
+592,52,Male,Hungary,asymptomatic
+593,52,Male,Hungary,asymptomatic
+594,54,Female,Hungary,non-anginal
+595,56,Male,Hungary,asymptomatic
+596,58,Female,Hungary,atypical angina
+597,65,Male,Hungary,asymptomatic
+598,32,Male,Switzerland,typical angina
+599,34,Male,Switzerland,asymptomatic
+600,35,Male,Switzerland,asymptomatic
+601,36,Male,Switzerland,asymptomatic
+602,38,Female,Switzerland,asymptomatic
+603,38,Female,Switzerland,asymptomatic
+604,38,Male,Switzerland,non-anginal
+605,38,Male,Switzerland,non-anginal
+606,38,Male,Switzerland,asymptomatic
+607,38,Male,Switzerland,asymptomatic
+608,40,Male,Switzerland,asymptomatic
+609,41,Male,Switzerland,asymptomatic
+610,42,Male,Switzerland,asymptomatic
+611,42,Male,Switzerland,asymptomatic
+612,43,Male,Switzerland,asymptomatic
+613,43,Male,Switzerland,asymptomatic
+614,43,Male,Switzerland,asymptomatic
+615,45,Male,Switzerland,non-anginal
+616,46,Male,Switzerland,asymptomatic
+617,46,Male,Switzerland,asymptomatic
+618,47,Male,Switzerland,non-anginal
+619,47,Male,Switzerland,non-anginal
+620,47,Male,Switzerland,asymptomatic
+621,47,Male,Switzerland,asymptomatic
+622,48,Male,Switzerland,asymptomatic
+623,50,Female,Switzerland,asymptomatic
+624,50,Male,Switzerland,asymptomatic
+625,50,Male,Switzerland,asymptomatic
+626,50,Male,Switzerland,asymptomatic
+627,51,Female,Switzerland,asymptomatic
+628,51,Male,Switzerland,asymptomatic
+629,51,Male,Switzerland,asymptomatic
+630,51,Male,Switzerland,asymptomatic
+631,51,Male,Switzerland,asymptomatic
+632,51,Male,Switzerland,asymptomatic
+633,51,Male,Switzerland,asymptomatic
+634,52,Male,Switzerland,asymptomatic
+635,52,Male,Switzerland,asymptomatic
+636,52,Male,Switzerland,asymptomatic
+637,52,Male,Switzerland,asymptomatic
+638,53,Male,Switzerland,atypical angina
+639,53,Male,Switzerland,atypical angina
+640,53,Male,Switzerland,non-anginal
+641,53,Male,Switzerland,non-anginal
+642,53,Male,Switzerland,asymptomatic
+643,53,Male,Switzerland,asymptomatic
+644,53,Male,Switzerland,asymptomatic
+645,53,Male,Switzerland,asymptomatic
+646,54,Male,Switzerland,asymptomatic
+647,54,Male,Switzerland,asymptomatic
+648,54,Male,Switzerland,asymptomatic
+649,55,Male,Switzerland,atypical angina
+650,55,Male,Switzerland,asymptomatic
+651,55,Male,Switzerland,asymptomatic
+652,55,Male,Switzerland,asymptomatic
+653,56,Male,Switzerland,non-anginal
+654,56,Male,Switzerland,non-anginal
+655,56,Male,Switzerland,non-anginal
+656,56,Male,Switzerland,asymptomatic
+657,56,Male,Switzerland,asymptomatic
+658,56,Male,Switzerland,asymptomatic
+659,56,Male,Switzerland,asymptomatic
+660,56,Male,Switzerland,asymptomatic
+661,57,Male,Switzerland,non-anginal
+662,57,Male,Switzerland,asymptomatic
+663,57,Male,Switzerland,asymptomatic
+664,57,Male,Switzerland,asymptomatic
+665,57,Male,Switzerland,asymptomatic
+666,57,Male,Switzerland,asymptomatic
+667,58,Male,Switzerland,asymptomatic
+668,58,Male,Switzerland,asymptomatic
+669,58,Male,Switzerland,asymptomatic
+670,59,Male,Switzerland,non-anginal
+671,59,Male,Switzerland,asymptomatic
+672,59,Male,Switzerland,asymptomatic
+673,59,Male,Switzerland,asymptomatic
+674,59,Male,Switzerland,asymptomatic
+675,60,Male,Switzerland,non-anginal
+676,60,Male,Switzerland,asymptomatic
+677,60,Male,Switzerland,asymptomatic
+678,60,Male,Switzerland,asymptomatic
+679,60,Male,Switzerland,asymptomatic
+680,60,Male,Switzerland,asymptomatic
+681,61,Male,Switzerland,non-anginal
+682,61,Male,Switzerland,asymptomatic
+683,61,Male,Switzerland,asymptomatic
+684,61,Male,Switzerland,asymptomatic
+685,61,Male,Switzerland,asymptomatic
+686,61,Male,Switzerland,asymptomatic
+687,61,Male,Switzerland,asymptomatic
+688,61,Male,Switzerland,asymptomatic
+689,61,Male,Switzerland,asymptomatic
+690,62,Female,Switzerland,typical angina
+691,62,Female,Switzerland,asymptomatic
+692,62,Male,Switzerland,typical angina
+693,62,Male,Switzerland,non-anginal
+694,62,Male,Switzerland,asymptomatic
+695,62,Male,Switzerland,asymptomatic
+696,62,Male,Switzerland,asymptomatic
+697,63,Male,Switzerland,asymptomatic
+698,63,Male,Switzerland,asymptomatic
+699,63,Male,Switzerland,asymptomatic
+700,63,Male,Switzerland,asymptomatic
+701,63,Male,Switzerland,asymptomatic
+702,64,Female,Switzerland,asymptomatic
+703,64,Female,Switzerland,asymptomatic
+704,64,Male,Switzerland,asymptomatic
+705,65,Male,Switzerland,asymptomatic
+706,65,Male,Switzerland,asymptomatic
+707,65,Male,Switzerland,asymptomatic
+708,65,Male,Switzerland,asymptomatic
+709,66,Female,Switzerland,asymptomatic
+710,66,Male,Switzerland,asymptomatic
+711,67,Male,Switzerland,typical angina
+712,68,Male,Switzerland,asymptomatic
+713,68,Male,Switzerland,asymptomatic
+714,69,Male,Switzerland,asymptomatic
+715,69,Male,Switzerland,asymptomatic
+716,70,Male,Switzerland,asymptomatic
+717,70,Male,Switzerland,asymptomatic
+718,72,Male,Switzerland,non-anginal
+719,73,Female,Switzerland,non-anginal
+720,74,Male,Switzerland,atypical angina
+721,63,Male,VA Long Beach,asymptomatic
+722,44,Male,VA Long Beach,asymptomatic
+723,60,Male,VA Long Beach,asymptomatic
+724,55,Male,VA Long Beach,asymptomatic
+725,66,Male,VA Long Beach,non-anginal
+726,66,Male,VA Long Beach,non-anginal
+727,65,Male,VA Long Beach,asymptomatic
+728,60,Male,VA Long Beach,non-anginal
+729,60,Male,VA Long Beach,non-anginal
+730,60,Male,VA Long Beach,atypical angina
+731,56,Male,VA Long Beach,atypical angina
+732,59,Male,VA Long Beach,asymptomatic
+733,62,Male,VA Long Beach,asymptomatic
+734,63,Male,VA Long Beach,non-anginal
+735,57,Male,VA Long Beach,asymptomatic
+736,62,Male,VA Long Beach,asymptomatic
+737,63,Male,VA Long Beach,asymptomatic
+738,46,Male,VA Long Beach,asymptomatic
+739,63,Male,VA Long Beach,asymptomatic
+740,60,Male,VA Long Beach,asymptomatic
+741,58,Male,VA Long Beach,asymptomatic
+742,64,Male,VA Long Beach,asymptomatic
+743,63,Male,VA Long Beach,non-anginal
+744,74,Male,VA Long Beach,non-anginal
+745,52,Male,VA Long Beach,non-anginal
+746,69,Male,VA Long Beach,asymptomatic
+747,51,Male,VA Long Beach,asymptomatic
+748,60,Male,VA Long Beach,asymptomatic
+749,56,Male,VA Long Beach,asymptomatic
+750,55,Male,VA Long Beach,non-anginal
+751,54,Male,VA Long Beach,asymptomatic
+752,77,Male,VA Long Beach,asymptomatic
+753,63,Male,VA Long Beach,asymptomatic
+754,55,Male,VA Long Beach,non-anginal
+755,52,Male,VA Long Beach,non-anginal
+756,64,Male,VA Long Beach,asymptomatic
+757,60,Male,VA Long Beach,asymptomatic
+758,60,Male,VA Long Beach,asymptomatic
+759,58,Male,VA Long Beach,asymptomatic
+760,59,Male,VA Long Beach,asymptomatic
+761,61,Male,VA Long Beach,non-anginal
+762,40,Male,VA Long Beach,asymptomatic
+763,61,Male,VA Long Beach,asymptomatic
+764,41,Male,VA Long Beach,asymptomatic
+765,57,Male,VA Long Beach,asymptomatic
+766,63,Male,VA Long Beach,asymptomatic
+767,59,Male,VA Long Beach,asymptomatic
+768,51,Male,VA Long Beach,asymptomatic
+769,59,Male,VA Long Beach,non-anginal
+770,42,Male,VA Long Beach,non-anginal
+771,55,Male,VA Long Beach,non-anginal
+772,63,Female,VA Long Beach,atypical angina
+773,62,Male,VA Long Beach,asymptomatic
+774,56,Male,VA Long Beach,atypical angina
+775,53,Male,VA Long Beach,asymptomatic
+776,68,Male,VA Long Beach,asymptomatic
+777,53,Male,VA Long Beach,asymptomatic
+778,60,Male,VA Long Beach,non-anginal
+779,62,Male,VA Long Beach,atypical angina
+780,59,Male,VA Long Beach,asymptomatic
+781,51,Male,VA Long Beach,asymptomatic
+782,61,Male,VA Long Beach,asymptomatic
+783,57,Male,VA Long Beach,asymptomatic
+784,56,Male,VA Long Beach,non-anginal
+785,58,Male,VA Long Beach,atypical angina
+786,69,Male,VA Long Beach,non-anginal
+787,67,Male,VA Long Beach,typical angina
+788,58,Male,VA Long Beach,asymptomatic
+789,65,Male,VA Long Beach,asymptomatic
+790,63,Male,VA Long Beach,atypical angina
+791,55,Male,VA Long Beach,atypical angina
+792,57,Male,VA Long Beach,asymptomatic
+793,65,Male,VA Long Beach,typical angina
+794,54,Male,VA Long Beach,asymptomatic
+795,72,Male,VA Long Beach,non-anginal
+796,75,Male,VA Long Beach,asymptomatic
+797,49,Male,VA Long Beach,typical angina
+798,51,Male,VA Long Beach,non-anginal
+799,60,Male,VA Long Beach,asymptomatic
+800,64,Female,VA Long Beach,asymptomatic
+801,58,Male,VA Long Beach,asymptomatic
+802,61,Male,VA Long Beach,asymptomatic
+803,67,Male,VA Long Beach,asymptomatic
+804,62,Male,VA Long Beach,asymptomatic
+805,65,Male,VA Long Beach,asymptomatic
+806,63,Male,VA Long Beach,asymptomatic
+807,69,Male,VA Long Beach,asymptomatic
+808,51,Male,VA Long Beach,asymptomatic
+809,62,Male,VA Long Beach,asymptomatic
+810,55,Male,VA Long Beach,non-anginal
+811,75,Male,VA Long Beach,asymptomatic
+812,40,Male,VA Long Beach,non-anginal
+813,67,Male,VA Long Beach,asymptomatic
+814,58,Male,VA Long Beach,asymptomatic
+815,60,Male,VA Long Beach,asymptomatic
+816,63,Male,VA Long Beach,asymptomatic
+817,35,Male,VA Long Beach,non-anginal
+818,62,Male,VA Long Beach,typical angina
+819,43,Male,VA Long Beach,asymptomatic
+820,63,Male,VA Long Beach,non-anginal
+821,68,Male,VA Long Beach,non-anginal
+822,65,Male,VA Long Beach,asymptomatic
+823,48,Male,VA Long Beach,non-anginal
+824,63,Male,VA Long Beach,asymptomatic
+825,64,Male,VA Long Beach,asymptomatic
+826,61,Male,VA Long Beach,asymptomatic
+827,50,Male,VA Long Beach,asymptomatic
+828,59,Male,VA Long Beach,asymptomatic
+829,55,Male,VA Long Beach,asymptomatic
+830,45,Male,VA Long Beach,non-anginal
+831,65,Male,VA Long Beach,asymptomatic
+832,61,Male,VA Long Beach,atypical angina
+833,49,Male,VA Long Beach,non-anginal
+834,72,Male,VA Long Beach,asymptomatic
+835,50,Male,VA Long Beach,asymptomatic
+836,64,Male,VA Long Beach,asymptomatic
+837,55,Male,VA Long Beach,asymptomatic
+838,63,Male,VA Long Beach,asymptomatic
+839,59,Male,VA Long Beach,asymptomatic
+840,56,Male,VA Long Beach,asymptomatic
+841,62,Male,VA Long Beach,non-anginal
+842,74,Male,VA Long Beach,asymptomatic
+843,54,Male,VA Long Beach,asymptomatic
+844,57,Male,VA Long Beach,asymptomatic
+845,62,Male,VA Long Beach,non-anginal
+846,76,Male,VA Long Beach,non-anginal
+847,54,Female,VA Long Beach,asymptomatic
+848,70,Male,VA Long Beach,asymptomatic
+849,61,Female,VA Long Beach,atypical angina
+850,48,Male,VA Long Beach,asymptomatic
+851,48,Male,VA Long Beach,non-anginal
+852,61,Male,VA Long Beach,typical angina
+853,66,Male,VA Long Beach,asymptomatic
+854,68,Male,VA Long Beach,typical angina
+855,55,Male,VA Long Beach,asymptomatic
+856,62,Male,VA Long Beach,non-anginal
+857,71,Male,VA Long Beach,non-anginal
+858,74,Male,VA Long Beach,typical angina
+859,53,Male,VA Long Beach,non-anginal
+860,58,Male,VA Long Beach,non-anginal
+861,75,Male,VA Long Beach,asymptomatic
+862,56,Male,VA Long Beach,non-anginal
+863,58,Male,VA Long Beach,non-anginal
+864,64,Male,VA Long Beach,asymptomatic
+865,54,Male,VA Long Beach,non-anginal
+866,54,Male,VA Long Beach,atypical angina
+867,59,Male,VA Long Beach,asymptomatic
+868,55,Male,VA Long Beach,asymptomatic
+869,57,Male,VA Long Beach,asymptomatic
+870,61,Male,VA Long Beach,asymptomatic
+871,41,Male,VA Long Beach,asymptomatic
+872,71,Male,VA Long Beach,asymptomatic
+873,38,Male,VA Long Beach,asymptomatic
+874,55,Male,VA Long Beach,asymptomatic
+875,56,Male,VA Long Beach,asymptomatic
+876,69,Male,VA Long Beach,asymptomatic
+877,64,Male,VA Long Beach,asymptomatic
+878,72,Male,VA Long Beach,asymptomatic
+879,69,Male,VA Long Beach,asymptomatic
+880,56,Male,VA Long Beach,asymptomatic
+881,62,Male,VA Long Beach,asymptomatic
+882,67,Male,VA Long Beach,asymptomatic
+883,57,Male,VA Long Beach,asymptomatic
+884,69,Male,VA Long Beach,asymptomatic
+885,51,Male,VA Long Beach,asymptomatic
+886,48,Male,VA Long Beach,asymptomatic
+887,69,Male,VA Long Beach,asymptomatic
+888,69,Male,VA Long Beach,non-anginal
+889,64,Male,VA Long Beach,asymptomatic
+890,57,Male,VA Long Beach,atypical angina
+891,53,Male,VA Long Beach,asymptomatic
+892,37,Male,VA Long Beach,non-anginal
+893,67,Male,VA Long Beach,asymptomatic
+894,74,Male,VA Long Beach,non-anginal
+895,63,Male,VA Long Beach,atypical angina
+896,58,Male,VA Long Beach,asymptomatic
+897,61,Male,VA Long Beach,asymptomatic
+898,64,Male,VA Long Beach,asymptomatic
+899,58,Male,VA Long Beach,asymptomatic
+900,60,Male,VA Long Beach,asymptomatic
+901,57,Male,VA Long Beach,asymptomatic
+902,55,Male,VA Long Beach,non-anginal
+903,55,Male,VA Long Beach,asymptomatic
+904,56,Male,VA Long Beach,asymptomatic
+905,57,Male,VA Long Beach,asymptomatic
+906,61,Male,VA Long Beach,non-anginal
+907,61,Male,VA Long Beach,non-anginal
+908,58,Male,VA Long Beach,non-anginal
+909,74,Male,VA Long Beach,asymptomatic
+910,68,Male,VA Long Beach,non-anginal
+911,51,Female,VA Long Beach,asymptomatic
+912,62,Male,VA Long Beach,asymptomatic
+913,53,Male,VA Long Beach,asymptomatic
+914,62,Male,VA Long Beach,asymptomatic
+915,46,Male,VA Long Beach,asymptomatic
+916,54,Female,VA Long Beach,asymptomatic
+917,62,Male,VA Long Beach,typical angina
+918,55,Male,VA Long Beach,asymptomatic
+919,58,Male,VA Long Beach,asymptomatic
+920,62,Male,VA Long Beach,atypical angina
